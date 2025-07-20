@@ -45,5 +45,11 @@ namespace DISCOS
                 pbxDiscos.Load("https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png");
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmAltaDisco PokeAlta = new frmAltaDisco();
+            PokeAlta.ShowDialog();
+        }
     }
 }

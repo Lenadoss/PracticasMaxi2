@@ -51,6 +51,29 @@ namespace negocio
 				conexion.Close();
 			}
 		}
+		public void Agregar(Disco nuevoDisco)
+		{
+			SqlConnection conexion = new SqlConnection();
+			SqlCommand comando = new SqlCommand();
+			
+			try
+			{
+				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database=DISCOS_DB; integrated security = true; ";
+				comando.CommandType = System.Data.CommandType.Text;
+				comando.CommandText = "INSERT INTO DISCOS VALUES ('" +nuevoDisco.Titulo+ "', '" + nuevoDisco.FechaLanzamiento.ToString("MM/dd/yyyy") + "', " +nuevoDisco.CantidadCanciones+ ", '', 1, 2);";
+				conexion.Open();                                                                   // MI COMPUTADORA ES REGION=DOM POR LO TANTO HAY QUE MODIFICAR EL FORMATO PARA QUE SEA ACEPTADO POR SQL CUANDO ENVIAMOS LA CONSULTA.
+				comando.Connection = conexion;
+				comando.ExecuteNonQuery();
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				conexion.Close();
+			}
+		}
 
 	}
 }

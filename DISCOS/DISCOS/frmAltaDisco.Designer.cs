@@ -36,6 +36,10 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
+            this.lblEstilo = new System.Windows.Forms.Label();
+            this.lblEdicion = new System.Windows.Forms.Label();
+            this.cboxEstilo = new System.Windows.Forms.ComboBox();
+            this.cboxEdicion = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -81,7 +85,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(101, 146);
+            this.btnAgregar.Location = new System.Drawing.Point(101, 206);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(96, 32);
             this.btnAgregar.TabIndex = 6;
@@ -91,7 +95,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(225, 146);
+            this.btnCancelar.Location = new System.Drawing.Point(225, 206);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(96, 32);
             this.btnCancelar.TabIndex = 7;
@@ -106,11 +110,51 @@
             this.dtpFecha.Size = new System.Drawing.Size(185, 22);
             this.dtpFecha.TabIndex = 8;
             // 
+            // lblEstilo
+            // 
+            this.lblEstilo.AutoSize = true;
+            this.lblEstilo.Location = new System.Drawing.Point(141, 134);
+            this.lblEstilo.Name = "lblEstilo";
+            this.lblEstilo.Size = new System.Drawing.Size(43, 16);
+            this.lblEstilo.TabIndex = 9;
+            this.lblEstilo.Text = "Estilo:";
+            // 
+            // lblEdicion
+            // 
+            this.lblEdicion.AutoSize = true;
+            this.lblEdicion.Location = new System.Drawing.Point(129, 164);
+            this.lblEdicion.Name = "lblEdicion";
+            this.lblEdicion.Size = new System.Drawing.Size(55, 16);
+            this.lblEdicion.TabIndex = 10;
+            this.lblEdicion.Text = "Edicion:";
+            // 
+            // cboxEstilo
+            // 
+            this.cboxEstilo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxEstilo.FormattingEnabled = true;
+            this.cboxEstilo.Location = new System.Drawing.Point(190, 131);
+            this.cboxEstilo.Name = "cboxEstilo";
+            this.cboxEstilo.Size = new System.Drawing.Size(185, 24);
+            this.cboxEstilo.TabIndex = 11;
+            // 
+            // cboxEdicion
+            // 
+            this.cboxEdicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxEdicion.FormattingEnabled = true;
+            this.cboxEdicion.Location = new System.Drawing.Point(190, 161);
+            this.cboxEdicion.Name = "cboxEdicion";
+            this.cboxEdicion.Size = new System.Drawing.Size(185, 24);
+            this.cboxEdicion.TabIndex = 12;
+            // 
             // frmAltaDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 231);
+            this.ClientSize = new System.Drawing.Size(430, 266);
+            this.Controls.Add(this.cboxEdicion);
+            this.Controls.Add(this.cboxEstilo);
+            this.Controls.Add(this.lblEdicion);
+            this.Controls.Add(this.lblEstilo);
             this.Controls.Add(this.dtpFecha);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
@@ -123,6 +167,7 @@
             this.Name = "frmAltaDisco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Disco";
+            this.Load += new System.EventHandler(this.frmAltaDisco_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +183,9 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DateTimePicker dtpFecha;
+        private System.Windows.Forms.Label lblEstilo;
+        private System.Windows.Forms.Label lblEdicion;
+        private System.Windows.Forms.ComboBox cboxEstilo;
+        private System.Windows.Forms.ComboBox cboxEdicion;
     }
 }

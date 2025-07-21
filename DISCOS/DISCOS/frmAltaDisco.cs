@@ -32,9 +32,26 @@ namespace DISCOS
                 nuevoDisco.Titulo = txtTitulo.Text;
                 nuevoDisco.FechaLanzamiento = dtpFecha.Value;
                 nuevoDisco.CantidadCanciones = int.Parse(txtCantidad.Text);
+                nuevoDisco.Estilo = (Estilo)cboxEstilo.SelectedItem;
+                nuevoDisco.Edicion = (Edicion)cboxEdicion.SelectedItem;
                 DiscoNegocio discoNegocio = new DiscoNegocio();
                 discoNegocio.Agregar(nuevoDisco);
                 Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void frmAltaDisco_Load(object sender, EventArgs e)
+        {
+            EdicionNegocio edicionNegocio = new EdicionNegocio();
+            EstiloNegocio estiloNegocio = new EstiloNegocio();
+            try
+            {
+                cboxEdicion.DataSource = edicionNegocio.listar();
+                cboxEstilo.DataSource = estiloNegocio.listar();
             }
             catch (Exception ex)
             {

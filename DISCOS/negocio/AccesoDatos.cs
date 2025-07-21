@@ -20,7 +20,8 @@ namespace negocio
 
         public AccesoDatos ()
         {
-            conexion.ConnectionString = "server=(localdb)\\MSSQLlocalDB; database=DISCOS_DB; integrated security = true;";
+            conexion = new SqlConnection(); 
+            conexion.ConnectionString = "server = (localdb)\\MSSQLLocalDB; database = DISCOS_DB; integrated security = true; ";
             comando = new SqlCommand();
         }
 

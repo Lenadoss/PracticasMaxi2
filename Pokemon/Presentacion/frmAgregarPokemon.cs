@@ -33,6 +33,8 @@ namespace Presentacion
                 nuevoPokemon.Numero = int.Parse(txtNumero.Text);
                 nuevoPokemon.Nombre = txtNombre.Text;
                 nuevoPokemon.Descripcion = txtDescripcion.Text;
+                nuevoPokemon.Tipo = (Elemento)cbBoxTipo.SelectedItem;
+                nuevoPokemon.Debilidad = (Elemento)cbBoxDebilidad.SelectedItem;
                 negocio.Agregar(nuevoPokemon);
                 Close();
             }
@@ -40,6 +42,13 @@ namespace Presentacion
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void frmAgregarPokemon_Load(object sender, EventArgs e)
+        {
+            ElementoNegocio negocio = new ElementoNegocio();
+            cbBoxDebilidad.DataSource = negocio.listar();
+            cbBoxTipo.DataSource = negocio.listar();
         }
     }
 }

@@ -52,6 +52,29 @@ namespace negocio
             {
                 conexion.Close();
             }
-        } 
+        }
+
+        public void Agregar(Pokemon nuevoPokemon)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = POKEDEX_DB; integrated security = true;";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "INSERT INTO POKEMONS VALUES (" + nuevoPokemon.Numero + ", '" + nuevoPokemon.Nombre+ "', '" + nuevoPokemon.Descripcion + "', '', 1, 2, null, 1);";
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
     }
 }

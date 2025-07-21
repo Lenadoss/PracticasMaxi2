@@ -47,5 +47,11 @@ namespace Presentacion
                 pbxPokemon.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
             }
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAgregarPokemon agregarPokemon = new frmAgregarPokemon();
+            agregarPokemon.ShowDialog();
+        }
     }
 }

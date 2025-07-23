@@ -25,7 +25,7 @@ namespace negocio
 				comando.Connection = conexion;
                 conexion.Open();
 				lector = comando.ExecuteReader();
-
+				 
 				while(lector.Read())
 				{
 					Disco aux = new Disco();
@@ -60,9 +60,11 @@ namespace negocio
 			{
 				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database=DISCOS_DB; integrated security = true; ";
 				comando.CommandType = System.Data.CommandType.Text;
-				comando.CommandText = "INSERT INTO DISCOS VALUES ('" +nuevoDisco.Titulo+ "', '" + nuevoDisco.FechaLanzamiento.ToString("MM/dd/yyyy") + "', " +nuevoDisco.CantidadCanciones+ ", '', 1, 2);";
-				conexion.Open();                                                                   // MI COMPUTADORA ES REGION=DOM POR LO TANTO HAY QUE MODIFICAR EL FORMATO PARA QUE SEA ACEPTADO POR SQL CUANDO ENVIAMOS LA CONSULTA.
-				comando.Connection = conexion;
+				comando.CommandText = "INSERT INTO DISCOS (titulo, fechalanzamiento, cantidadcanciones, urlimagentapa, idestilo, idtipoedicion) VALUES ('" + nuevoDisco.Titulo+ "', '" + nuevoDisco.FechaLanzamiento.ToString("MM/dd/yyyy") + "', " +nuevoDisco.CantidadCanciones+ ", '', @idEstilo, @idEdicion);";
+				comando.Parameters.AddWithValue("idEstilo", nuevoDisco.Estilo.Id);
+				comando.Parameters.AddWithValue("idEdicion", nuevoDisco.Edicion.Id);
+                conexion.Open();                                                                   // MI COMPUTADORA ES REGION=DOM POR LO TANTO HAY QUE MODIFICAR EL FORMATO PARA QUE SEA ACEPTADO POR SQL CUANDO ENVIAMOS LA CONSULTA.
+				comando.Connection = conexion; 
 				comando.ExecuteNonQuery();
             }
 			catch (Exception ex)

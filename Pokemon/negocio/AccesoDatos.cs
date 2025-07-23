@@ -20,7 +20,7 @@ namespace negocio
 
         AccesoDatos()
         {
-            conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database=POKEDEX_DB; integrated security=true;";
+            conexion = new SqlConnection("server=(localdb)\\MSSQLLocalDB; database=POKEDEX_DB; integrated security=true;");
             comando = new SqlCommand();
         }
 
@@ -63,6 +63,11 @@ namespace negocio
             if (lector != null)
                 lector.Close();
             conexion.Close();
+        }
+
+        public void setearParametro(string nombre, object valor)
+        {
+            comando.Parameters.AddWithValue(nombre, valor);
         }
     }
 }

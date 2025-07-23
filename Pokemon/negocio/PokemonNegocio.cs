@@ -62,7 +62,9 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = POKEDEX_DB; integrated security = true;";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "INSERT INTO POKEMONS VALUES (" + nuevoPokemon.Numero + ", '" + nuevoPokemon.Nombre+ "', '" + nuevoPokemon.Descripcion + "', '', 1, 2, null, 1);";
+                comando.CommandText = "INSERT INTO POKEMONS (numero, nombre, descripcion, urlimagen, idtipo, iddebilidad, activo) VALUES (" + nuevoPokemon.Numero + ", '" + nuevoPokemon.Nombre+ "', '" + nuevoPokemon.Descripcion + "', '', @idTipo, @idDebilidad, 1);";
+                comando.Parameters.AddWithValue("idTipo", nuevoPokemon.Tipo.Id);
+                comando.Parameters.AddWithValue("idDebilidad", nuevoPokemon.Debilidad.Id);
                 conexion.Open();
                 comando.Connection = conexion;
                 comando.ExecuteNonQuery();

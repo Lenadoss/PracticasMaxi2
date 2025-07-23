@@ -20,8 +20,7 @@ namespace negocio
 
         public AccesoDatos ()
         {
-            conexion = new SqlConnection(); 
-            conexion.ConnectionString = "server = (localdb)\\MSSQLLocalDB; database = DISCOS_DB; integrated security = true; ";
+            conexion = new SqlConnection("server = (localdb)\\MSSQLLocalDB; database = DISCOS_DB; integrated security = true; "); 
             comando = new SqlCommand();
         }
 
@@ -64,6 +63,11 @@ namespace negocio
             {    
                 throw ex;
             }
+        }
+
+        public void setearParametro(string nombre, object valor)
+        {
+            comando.Parameters.AddWithValue(nombre,valor);
         }
 
 

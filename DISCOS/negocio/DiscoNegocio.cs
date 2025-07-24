@@ -33,7 +33,13 @@ namespace negocio
 					aux.Titulo = (string)lector["titulo"];
 					aux.FechaLanzamiento = (DateTime)lector["fechalanzamiento"];
 					aux.CantidadCanciones = (int)lector["CantidadCanciones"];
-					aux.UrlImagenTapa = (string)lector["urlimagentapa"];
+
+					//if (!(lector.IsDBNull(lector.GetOrdinal("urlimagentapa"))))
+					//	aux.UrlImagenTapa = (string)lector["urlimagentapa"];
+
+					if (!(lector["urlimagentapa"] is DBNull))
+						aux.UrlImagenTapa = (string)lector["urlimagentapa"];
+
 					aux.Estilo = new Estilo();
 					aux.Estilo.Descripcion = (string)lector["Estilo"];
 					aux.Edicion = new Edicion();
@@ -60,10 +66,11 @@ namespace negocio
 			{
 				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database=DISCOS_DB; integrated security = true; ";
 				comando.CommandType = System.Data.CommandType.Text;
-				comando.CommandText = "INSERT INTO DISCOS (titulo, fechalanzamiento, cantidadcanciones, urlimagentapa, idestilo, idtipoedicion) VALUES ('" + nuevoDisco.Titulo+ "', '" + nuevoDisco.FechaLanzamiento.ToString("MM/dd/yyyy") + "', " +nuevoDisco.CantidadCanciones+ ", '', @idEstilo, @idEdicion);";
+				comando.CommandText = "INSERT INTO DISCOS (titulo, fechalanzamiento, cantidadcanciones, urlimagentapa, idestilo, idtipoedicion) VALUES ('" + nuevoDisco.Titulo+ "', '" + nuevoDisco.FechaLanzamiento.ToString("MM/dd/yyyy") + "', " +nuevoDisco.CantidadCanciones+ ", @urlImagenTapa, @idEstilo, @idEdicion);";
 				comando.Parameters.AddWithValue("idEstilo", nuevoDisco.Estilo.Id);
 				comando.Parameters.AddWithValue("idEdicion", nuevoDisco.Edicion.Id);
-                conexion.Open();                                                                   // MI COMPUTADORA ES REGION=DOM POR LO TANTO HAY QUE MODIFICAR EL FORMATO PARA QUE SEA ACEPTADO POR SQL CUANDO ENVIAMOS LA CONSULTA.
+				comando.Parameters.AddWithValue("urlImagenTapa", nuevoDisco.UrlImagenTapa);
+				conexion.Open();                                                                   // MI COMPUTADORA ES REGION=DOM POR LO TANTO HAY QUE MODIFICAR EL FORMATO PARA QUE SEA ACEPTADO POR SQL CUANDO ENVIAMOS LA CONSULTA.
 				comando.Connection = conexion; 
 				comando.ExecuteNonQuery();
             }

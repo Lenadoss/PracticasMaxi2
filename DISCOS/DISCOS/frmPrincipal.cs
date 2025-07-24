@@ -22,10 +22,22 @@ namespace DISCOS
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            DiscoNegocio negocio = new DiscoNegocio();  
-            Discos = negocio.Listar();
-            dgvDiscos.DataSource = Discos;
-            dgvDiscos.Columns["urlimagentapa"].Visible = false;
+            Cargar();
+        }
+
+        private void Cargar()
+        {
+            DiscoNegocio negocio = new DiscoNegocio();
+            try
+            {
+                Discos = negocio.Listar();
+                dgvDiscos.DataSource = Discos;
+                dgvDiscos.Columns["urlimagentapa"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void dgvDiscos_SelectionChanged(object sender, EventArgs e)
@@ -50,6 +62,7 @@ namespace DISCOS
         {
             frmAltaDisco PokeAlta = new frmAltaDisco();
             PokeAlta.ShowDialog();
+            Cargar();
         }
     }
 }

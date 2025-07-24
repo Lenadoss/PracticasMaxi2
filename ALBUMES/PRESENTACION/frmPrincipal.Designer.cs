@@ -1,0 +1,102 @@
+﻿namespace PRESENTACION
+{
+    partial class frmPrincipal
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.dgvAlbumes = new System.Windows.Forms.DataGridView();
+            this.pbxAlbumes = new System.Windows.Forms.PictureBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAlbumes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxAlbumes)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgvAlbumes
+            // 
+            this.dgvAlbumes.AllowUserToAddRows = false;
+            this.dgvAlbumes.AllowUserToDeleteRows = false;
+            this.dgvAlbumes.BackgroundColor = System.Drawing.Color.Azure;
+            this.dgvAlbumes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAlbumes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvAlbumes.GridColor = System.Drawing.Color.Cornsilk;
+            this.dgvAlbumes.Location = new System.Drawing.Point(353, 12);
+            this.dgvAlbumes.MultiSelect = false;
+            this.dgvAlbumes.Name = "dgvAlbumes";
+            this.dgvAlbumes.ReadOnly = true;
+            this.dgvAlbumes.RowHeadersWidth = 51;
+            this.dgvAlbumes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAlbumes.Size = new System.Drawing.Size(740, 299);
+            this.dgvAlbumes.TabIndex = 0;
+            this.dgvAlbumes.SelectionChanged += new System.EventHandler(this.dgvAlbumes_SelectionChanged);
+            // 
+            // pbxAlbumes
+            // 
+            this.pbxAlbumes.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pbxAlbumes.Location = new System.Drawing.Point(12, 12);
+            this.pbxAlbumes.Name = "pbxAlbumes";
+            this.pbxAlbumes.Size = new System.Drawing.Size(335, 299);
+            this.pbxAlbumes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxAlbumes.TabIndex = 1;
+            this.pbxAlbumes.TabStop = false;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(12, 327);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(147, 41);
+            this.btnAgregar.TabIndex = 2;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // frmPrincipal
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1105, 380);
+            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.pbxAlbumes);
+            this.Controls.Add(this.dgvAlbumes);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Name = "frmPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Albumes Disponibles";
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAlbumes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxAlbumes)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.DataGridView dgvAlbumes;
+        private System.Windows.Forms.PictureBox pbxAlbumes;
+        private System.Windows.Forms.Button btnAgregar;
+    }
+}
+

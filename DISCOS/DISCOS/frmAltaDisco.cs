@@ -32,6 +32,7 @@ namespace DISCOS
                 nuevoDisco.Titulo = txtTitulo.Text;
                 nuevoDisco.FechaLanzamiento = dtpFecha.Value;
                 nuevoDisco.CantidadCanciones = int.Parse(txtCantidad.Text);
+                nuevoDisco.UrlImagenTapa = txtUrlImagenTapa.Text;
                 nuevoDisco.Estilo = (Estilo)cboxEstilo.SelectedItem;
                 nuevoDisco.Edicion = (Edicion)cboxEdicion.SelectedItem;
                 DiscoNegocio discoNegocio = new DiscoNegocio();
@@ -56,6 +57,23 @@ namespace DISCOS
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtUrlImagenTapa_Leave(object sender, EventArgs e)
+        {
+            CargarImagen(txtUrlImagenTapa.Text);
+        }
+
+        private void CargarImagen(string imagen)
+        {
+            try
+            {
+                pbxUrlImagenTapa.Load(imagen);
+            }
+            catch (Exception)
+            {
+                pbxUrlImagenTapa.Load("https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png");
             }
         }
     }

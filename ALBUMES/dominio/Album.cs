@@ -7,17 +7,16 @@ using System.ComponentModel;
 
 namespace dominio
 {
-    public class Disco
+    public class Album
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
-        [DisplayName("Fecha de lanzamiento")]
+
+        [DisplayName("Fecha de lanzamiento del album")]
         public DateTime FechaLanzamiento { get; set; }
-        [DisplayName("Cantidad de canciones Disponible")]
-        public int CantidadCanciones { get; set; }
-        [DisplayName("Url de la imagen")]
-        public string UrlImagenTapa { get; set; }
-        public Estilo Estilo { get; set; }
+        [DisplayName("Url del cover")]
+        public string UrlImagenCover { get; set; }
+        public Genero Genero { get; set; }
         public Edicion Edicion { get; set; }
 
     }

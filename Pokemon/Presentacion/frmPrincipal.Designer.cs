@@ -46,12 +46,16 @@
             // 
             // dgvPokemon
             // 
+            this.dgvPokemon.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedHeaders;
             this.dgvPokemon.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPokemon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPokemon.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvPokemon.Location = new System.Drawing.Point(409, 51);
+            this.dgvPokemon.MultiSelect = false;
             this.dgvPokemon.Name = "dgvPokemon";
             this.dgvPokemon.RowHeadersWidth = 51;
             this.dgvPokemon.RowTemplate.Height = 24;
+            this.dgvPokemon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPokemon.Size = new System.Drawing.Size(876, 342);
             this.dgvPokemon.TabIndex = 1;
             this.dgvPokemon.SelectionChanged += new System.EventHandler(this.dgvPokemon_SelectionChanged);

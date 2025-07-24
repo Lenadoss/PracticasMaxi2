@@ -22,10 +22,7 @@ namespace Presentacion
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            PokemonNegocio negocio = new PokemonNegocio();
-            listaPokemons = negocio.listar();
-            dgvPokemon.DataSource = listaPokemons;
-            dgvPokemon.Columns["urlimagen"].Visible = false;
+            Cargar();
         }
 
         private void dgvPokemon_SelectionChanged(object sender, EventArgs e)
@@ -48,10 +45,26 @@ namespace Presentacion
             }
         }
 
+        private void Cargar()
+        {
+            PokemonNegocio negocio = new PokemonNegocio();
+            try
+            {
+                listaPokemons = negocio.listar();
+                dgvPokemon.DataSource = listaPokemons;
+                dgvPokemon.Columns["urlimagen"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             frmAgregarPokemon agregarPokemon = new frmAgregarPokemon();
             agregarPokemon.ShowDialog();
+            Cargar();
         }
     }
 }

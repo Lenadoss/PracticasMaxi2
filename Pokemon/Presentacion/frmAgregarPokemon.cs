@@ -33,6 +33,7 @@ namespace Presentacion
                 nuevoPokemon.Numero = int.Parse(txtNumero.Text);
                 nuevoPokemon.Nombre = txtNombre.Text;
                 nuevoPokemon.Descripcion = txtDescripcion.Text;
+                nuevoPokemon.UrlImagen = txtUrlImagen.Text;
                 nuevoPokemon.Tipo = (Elemento)cbBoxTipo.SelectedItem;
                 nuevoPokemon.Debilidad = (Elemento)cbBoxDebilidad.SelectedItem;
                 negocio.Agregar(nuevoPokemon);
@@ -49,6 +50,23 @@ namespace Presentacion
             ElementoNegocio negocio = new ElementoNegocio();
             cbBoxDebilidad.DataSource = negocio.listar();
             cbBoxTipo.DataSource = negocio.listar();
+        }
+
+        private void CargarImagen(string imagen)
+        {
+            try
+            {
+                pbxPokemon.Load(imagen);
+            }
+            catch (Exception)
+            {
+                pbxPokemon.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+            }
+        }
+
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            CargarImagen(txtUrlImagen.Text);
         }
     }
 }

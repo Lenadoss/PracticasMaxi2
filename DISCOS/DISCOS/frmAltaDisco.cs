@@ -14,9 +14,15 @@ namespace DISCOS
 {
     public partial class frmAltaDisco : Form
     {
+        private Disco disco;
         public frmAltaDisco()
         {
             InitializeComponent();
+        }
+        public frmAltaDisco(Disco disco)
+        {
+            InitializeComponent();
+            this.disco = disco;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -52,7 +58,24 @@ namespace DISCOS
             try
             {
                 cboxEdicion.DataSource = edicionNegocio.listar();
+                cboxEdicion.ValueMember = "Id";
+                cboxEdicion.DisplayMember = "Descripcion";
                 cboxEstilo.DataSource = estiloNegocio.listar();
+                cboxEstilo.ValueMember = "Id";
+                cboxEstilo.DisplayMember = "Descripcion";
+
+                if(disco != null)
+                {
+                    txtTitulo.Text = disco.Titulo;
+                    dtpFecha.Value = disco.FechaLanzamiento;
+                    txtCantidad.Text = disco.CantidadCanciones.ToString();
+                    txtUrlImagenTapa.Text = disco.UrlImagenTapa;
+                    cboxEstilo.SelectedValue = disco.Estilo.Id;
+                    cboxEdicion.SelectedValue = disco.Edicion.Id;
+                    CargarImagen(txtUrlImagenTapa.Text);
+                    Text = "Modificar Disco";
+                    btnAgregar.Text = "Modificar";
+                }
             }
             catch (Exception ex)
             {

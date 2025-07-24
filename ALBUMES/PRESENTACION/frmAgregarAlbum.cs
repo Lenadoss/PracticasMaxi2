@@ -14,9 +14,15 @@ namespace PRESENTACION
 {
     public partial class frmAgregarAlbum : Form
     {
+        private Album album;
         public frmAgregarAlbum()
         {
             InitializeComponent();
+        }
+        public frmAgregarAlbum(Album album)
+        {
+            InitializeComponent();
+            this.album = album;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -52,7 +58,27 @@ namespace PRESENTACION
             try
             {
                 cboxGenero.DataSource = generonegocio.listar();
+                cboxGenero.ValueMember = "Id";
+                cboxGenero.DisplayMember = "Descripcion";
+
                 cboxEdicion.DataSource = edicionnegocio.listar();
+                cboxEdicion.ValueMember = "Id";
+                cboxEdicion.DisplayMember = "Descripcion";
+
+                if(album!=null)
+                {
+                    txtTitulo.Text = album.Titulo;
+                    dtpFechaLanzamiento.Value = album.FechaLanzamiento;
+
+                    txtUrl.Text = album.UrlImagenCover;
+                    CargarImagen(album.UrlImagenCover);
+
+                    cboxGenero.SelectedValue = album.Genero.Id;
+                    cboxEdicion.SelectedValue = album.Edicion.Id;
+
+                    Text = "Modificar Album";
+                    btnAgregar.Text = "Modificar";
+                }
             }
             catch (Exception ex)
             {

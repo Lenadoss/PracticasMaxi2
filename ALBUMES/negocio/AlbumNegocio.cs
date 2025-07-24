@@ -22,7 +22,7 @@ namespace negocio
 
 				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = ALBUMES_DB; integrated security = true;";
 				comando.CommandType = System.Data.CommandType.Text;
-				comando.CommandText = "SELECT a.id, a.titulo, a.fechalanzamiento, a.urlimagencover, g.descripcion GENERO, te.descripcion EDICION FROM ALBUMES a, GENEROS g, TIPOSEDICION te WHERE a.idgenero = g.id AND a.idtipoedicion = te.id;";
+				comando.CommandText = "SELECT a.id, a.titulo, a.fechalanzamiento, a.urlimagencover, g.descripcion GENERO, te.descripcion EDICION, a.idgenero, a.idtipoedicion FROM ALBUMES a, GENEROS g, TIPOSEDICION te WHERE a.idgenero = g.id AND a.idtipoedicion = te.id;";
 				comando.Connection = conexion;
 				conexion.Open();
 				lector = comando.ExecuteReader();
@@ -35,8 +35,10 @@ namespace negocio
 					aux.FechaLanzamiento = (DateTime)lector["fechalanzamiento"];
 					aux.UrlImagenCover = (string)lector["urlimagencover"];
 					aux.Genero = new Genero();
+					aux.Genero.Id = (int)lector["idgenero"];
 					aux.Genero.Descripcion = (string)lector["GENERO"];
 					aux.Edicion = new Edicion();
+					aux.Edicion.Id = (int)lector["idtipoedicion"];
 					aux.Edicion.Descripcion = (string)lector["EDICION"];
 
 					lista.Add(aux);

@@ -60,8 +60,16 @@ namespace DISCOS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmAltaDisco PokeAlta = new frmAltaDisco();
-            PokeAlta.ShowDialog();
+            frmAltaDisco DiscoAlta = new frmAltaDisco();
+            DiscoAlta.ShowDialog();
+            Cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+            frmAltaDisco DiscoModificar = new frmAltaDisco(seleccionado);
+            DiscoModificar.ShowDialog();
             Cargar();
         }
     }

@@ -21,7 +21,7 @@ namespace negocio
             {
                 conexion.ConnectionString = "server = (localdb)\\MSSQLLocalDB; database = POKEDEX_DB; integrated security = true;";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT p.id, p.numero, p.nombre, p.descripcion, p.urlimagen, t.descripcion Tipo, d.descripcion Debilidad FROM Pokemons p, Elementos t, Elementos d WHERE p.idtipo = t.id AND p.iddebilidad = d.id;";
+                comando.CommandText = "SELECT p.id, p.numero, p.nombre, p.descripcion, p.urlimagen, t.descripcion Tipo, d.descripcion Debilidad, p.idtipo, p.iddebilidad FROM Pokemons p, Elementos t, Elementos d WHERE p.idtipo = t.id AND p.iddebilidad = d.id;";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -41,8 +41,10 @@ namespace negocio
                         aux.UrlImagen = (string)lector["urlimagen"];
 
                     aux.Tipo = new Elemento();
+                    aux.Tipo.Id = (int)lector["idtipo"];
                     aux.Tipo.Descripcion = (string)lector["Tipo"];
                     aux.Debilidad = new Elemento();
+                    aux.Debilidad.Id = (int)lector["iddebilidad"];
                     aux.Debilidad.Descripcion = (string)lector["Debilidad"];
 
                     lista.Add(aux);

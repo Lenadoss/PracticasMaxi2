@@ -66,5 +66,13 @@ namespace Presentacion
             agregarPokemon.ShowDialog();
             Cargar();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Pokemon seleccionado = (Pokemon)dgvPokemon.CurrentRow.DataBoundItem;
+            frmAgregarPokemon modificarPokemon = new frmAgregarPokemon(seleccionado);
+            modificarPokemon.ShowDialog();
+            Cargar();
+        }
     }
 }

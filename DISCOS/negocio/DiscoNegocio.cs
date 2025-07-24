@@ -21,7 +21,7 @@ namespace negocio
 			{
 				conexion.ConnectionString = "server = (localdb)\\MSSQLlocalDB ; database = DISCOS_DB; integrated security = true; ";
 				comando.CommandType = System.Data.CommandType.Text;
-				comando.CommandText = "SELECT d.id, d.titulo, d.fechalanzamiento, d.cantidadcanciones, d.urlimagentapa, e.descripcion Estilo, te.descripcion Edicion FROM discos d, estilos e, tiposedicion te WHERE idestilo = e.id AND idtipoedicion = te.id";
+				comando.CommandText = "SELECT d.id, d.titulo, d.fechalanzamiento, d.cantidadcanciones, d.urlimagentapa, e.descripcion Estilo, te.descripcion Edicion, d.idestilo, d.idtipoedicion FROM discos d, estilos e, tiposedicion te WHERE idestilo = e.id AND idtipoedicion = te.id";
 				comando.Connection = conexion;
                 conexion.Open();
 				lector = comando.ExecuteReader();
@@ -41,8 +41,10 @@ namespace negocio
 						aux.UrlImagenTapa = (string)lector["urlimagentapa"];
 
 					aux.Estilo = new Estilo();
+					aux.Estilo.Id = (int)lector["idestilo"];
 					aux.Estilo.Descripcion = (string)lector["Estilo"];
 					aux.Edicion = new Edicion();
+					aux.Edicion.Id = (int)lector["idtipoedicion"];
 					aux.Edicion.Descripcion = (string)lector["Edicion"];
 					lista.Add(aux);
 				}

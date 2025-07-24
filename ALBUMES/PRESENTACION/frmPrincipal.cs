@@ -65,5 +65,13 @@ namespace PRESENTACION
         {
             Cargar();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Album seleccionado = (Album)dgvAlbumes.CurrentRow.DataBoundItem;
+            frmAgregarAlbum frmModificarAlbum = new frmAgregarAlbum(seleccionado);
+            frmModificarAlbum.ShowDialog();
+            Cargar();
+        }
     }
 }

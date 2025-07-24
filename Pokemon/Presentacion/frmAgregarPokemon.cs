@@ -14,9 +14,15 @@ namespace Presentacion
 {
     public partial class frmAgregarPokemon : Form
     {
+        private Pokemon pokemon;
         public frmAgregarPokemon()
         {
             InitializeComponent();
+        }
+        public frmAgregarPokemon(Pokemon pokemon)
+        {
+            InitializeComponent();
+            this.pokemon = pokemon;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -49,7 +55,22 @@ namespace Presentacion
         {
             ElementoNegocio negocio = new ElementoNegocio();
             cbBoxDebilidad.DataSource = negocio.listar();
+            cbBoxDebilidad.ValueMember = "Id";
+            cbBoxDebilidad.DisplayMember = "Descripcion";
             cbBoxTipo.DataSource = negocio.listar();
+            cbBoxTipo.ValueMember = "Id";
+            cbBoxTipo.DisplayMember = "Descripcion";
+
+            if(pokemon != null)
+            {
+                txtNumero.Text = pokemon.Numero.ToString();
+                txtNombre.Text = pokemon.Nombre;
+                txtDescripcion.Text = pokemon.Descripcion;
+                txtUrlImagen.Text = pokemon.UrlImagen;
+                CargarImagen(pokemon.UrlImagen);
+                cbBoxTipo.SelectedValue = pokemon.Tipo.Id;
+                cbBoxDebilidad.SelectedValue = pokemon.Debilidad.Id;
+            }
         }
 
         private void CargarImagen(string imagen)

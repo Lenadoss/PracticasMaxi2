@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using dominioo;
+using negocioo;
+using helpers;
+
+namespace presentacion
+{
+    public partial class frmPrincipal : Form
+    {
+        private List<Pelicula> listaPeliculas;
+        public frmPrincipal()
+        {
+            InitializeComponent();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAgregar Agregar = new frmAgregar();
+            Agregar.ShowDialog();
+            Cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Pelicula Seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
+            frmAgregar Modificar = new frmAgregar(Seleccionado);
+            Modificar.ShowDialog();
+            Cargar();
+        }
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            Cargar();
+        }
+
+        private void Cargar()
+        {
+            NegocioPelicula NegocioPelicula = new NegocioPelicula();
+            listaPeliculas = NegocioPelicula.listar();
+            dgvPelicula.DataSource = listaPeliculas;
+            dgvPelicula.Columns["urlimagen"].Visible = false;
+        }
+
+        private void CargarImagen(string Imagen)
+        {
+            try
+            {
+                pcboxPelicula.Load(Imagen);
+            }
+            catch (Exception)
+            {
+                pcboxPelicula.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+            }
+        }
+
+        private void dgvPelicula_SelectionChanged(object sender, EventArgs e)
+        {
+            Pelicula Seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
+            string Imagen = Seleccionado.UrlImagen;
+            CargarImagen(Imagen);
+        }
+    }
+}

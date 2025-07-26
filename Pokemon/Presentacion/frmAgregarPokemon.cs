@@ -14,7 +14,7 @@ namespace Presentacion
 {
     public partial class frmAgregarPokemon : Form
     {
-        private Pokemon pokemon;
+        private Pokemon pokemon = null;
         public frmAgregarPokemon()
         {
             InitializeComponent();
@@ -33,16 +33,27 @@ namespace Presentacion
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
-            Pokemon nuevoPokemon = new Pokemon();
             try
             {
-                nuevoPokemon.Numero = int.Parse(txtNumero.Text);
-                nuevoPokemon.Nombre = txtNombre.Text;
-                nuevoPokemon.Descripcion = txtDescripcion.Text;
-                nuevoPokemon.UrlImagen = txtUrlImagen.Text;
-                nuevoPokemon.Tipo = (Elemento)cbBoxTipo.SelectedItem;
-                nuevoPokemon.Debilidad = (Elemento)cbBoxDebilidad.SelectedItem;
-                negocio.Agregar(nuevoPokemon);
+                if (pokemon == null) 
+                    pokemon = new Pokemon();
+                pokemon.Numero = int.Parse(txtNumero.Text);
+                pokemon.Nombre = txtNombre.Text;
+                pokemon.Descripcion = txtDescripcion.Text;
+                pokemon.UrlImagen = txtUrlImagen.Text;
+                pokemon.Tipo = (Elemento)cbBoxTipo.SelectedItem;
+                pokemon.Debilidad = (Elemento)cbBoxDebilidad.SelectedItem;
+
+                if(pokemon.Id == 0)
+                {
+                    negocio.Agregar(pokemon);
+                    MessageBox.Show("Pokemon agregado correctamente");
+                }
+                else
+                {
+                    negocio.Modificar(pokemon);
+                    MessageBox.Show("Pokemon modificado correctamente");
+                }
                 Close();
             }
             catch (Exception ex)

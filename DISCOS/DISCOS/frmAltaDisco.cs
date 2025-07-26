@@ -14,7 +14,7 @@ namespace DISCOS
 {
     public partial class frmAltaDisco : Form
     {
-        private Disco disco;
+        private Disco disco = null;
         public frmAltaDisco()
         {
             InitializeComponent();
@@ -34,16 +34,28 @@ namespace DISCOS
         {
             try
             {
-                Disco nuevoDisco = new Disco();
-                nuevoDisco.Titulo = txtTitulo.Text;
-                nuevoDisco.FechaLanzamiento = dtpFecha.Value;
-                nuevoDisco.CantidadCanciones = int.Parse(txtCantidad.Text);
-                nuevoDisco.UrlImagenTapa = txtUrlImagenTapa.Text;
-                nuevoDisco.Estilo = (Estilo)cboxEstilo.SelectedItem;
-                nuevoDisco.Edicion = (Edicion)cboxEdicion.SelectedItem;
+                if(disco == null)
+                    disco = new Disco();
+                disco.Titulo = txtTitulo.Text;
+                disco.FechaLanzamiento = dtpFecha.Value;
+                disco.CantidadCanciones = int.Parse(txtCantidad.Text);
+                disco.UrlImagenTapa = txtUrlImagenTapa.Text;
+                disco.Estilo = (Estilo)cboxEstilo.SelectedItem;
+                disco.Edicion = (Edicion)cboxEdicion.SelectedItem;
                 DiscoNegocio discoNegocio = new DiscoNegocio();
-                discoNegocio.Agregar(nuevoDisco);
-                Close();
+
+                if(disco.Id == 0)
+                {
+                    discoNegocio.Agregar(disco);
+                    MessageBox.Show("Disco agregado correctamente!");
+                }
+                else
+                {
+                    discoNegocio.Modificar(disco);
+                    MessageBox.Show("Disco modificado correctamente!");
+                }
+
+                    Close();
             }
             catch (Exception ex)
             {

@@ -14,7 +14,7 @@ namespace PRESENTACION
 {
     public partial class frmAgregarAlbum : Form
     {
-        private Album album;
+        private Album album = null;
         public frmAgregarAlbum()
         {
             InitializeComponent();
@@ -32,17 +32,28 @@ namespace PRESENTACION
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            AlbumNegocio negocio = new AlbumNegocio();
             try
             {
-                Album NuevoAlbum = new Album();
-                NuevoAlbum.Titulo = txtTitulo.Text;
-                NuevoAlbum.FechaLanzamiento = dtpFechaLanzamiento.Value;
-                NuevoAlbum.UrlImagenCover = txtUrl.Text;
-                NuevoAlbum.Genero = (Genero)cboxGenero.SelectedItem;
-                NuevoAlbum.Edicion = (Edicion)cboxEdicion.SelectedItem;
-                AlbumNegocio negocio = new AlbumNegocio();
-                negocio.Agregar(NuevoAlbum);
-                Close();
+                if (album == null)
+                    album = new Album();
+                album.Titulo = txtTitulo.Text;
+                album.FechaLanzamiento = dtpFechaLanzamiento.Value;
+                album.UrlImagenCover = txtUrl.Text;
+                album.Genero = (Genero)cboxGenero.SelectedItem;
+                album.Edicion = (Edicion)cboxEdicion.SelectedItem;
+                
+                if(album.Id == 0)
+                {
+                    negocio.Agregar(album);
+                    MessageBox.Show("Album agregado exitosamente");
+                }
+                else
+                {
+                    negocio.Modificar(album);
+                    MessageBox.Show("Album Modificado exitosamente");
+                }
+                    Close();
             }
             catch (Exception ex)
             {

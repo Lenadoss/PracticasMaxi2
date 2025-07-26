@@ -83,5 +83,34 @@ namespace negocio
 				conexion.Close();
 			}
 		}
+
+        public void Modificar(Album album)
+        {
+			SqlConnection conexion = new SqlConnection();
+			SqlCommand comando = new SqlCommand();
+			try
+			{
+				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database=ALBUMES_DB; integrated security = true;";
+				comando.CommandType = System.Data.CommandType.Text;
+				comando.CommandText = "UPDATE ALBUMES SET titulo = @titulo, fechalanzamiento = @fecha , urlimagencover = @url, idgenero = @idgenero, idtipoedicion = @idtipoedicion WHERE id = @id ;";
+				comando.Parameters.AddWithValue("titulo",album.Titulo);
+                comando.Parameters.AddWithValue("fecha",album.FechaLanzamiento);
+                comando.Parameters.AddWithValue("url",album.UrlImagenCover);
+                comando.Parameters.AddWithValue("idgenero",album.Genero.Id);
+                comando.Parameters.AddWithValue("idtipoedicion",album.Edicion.Id);
+                comando.Parameters.AddWithValue("id",album.Id);
+                comando.Connection = conexion;
+				conexion.Open();
+				comando.ExecuteNonQuery();
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				conexion.Close();
+			}
+        }
     }
 }

@@ -87,5 +87,29 @@ namespace negocio
                 conexion.Close();
             }
         }
+
+        public void Modificar(Pokemon pokemon)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();  
+            try
+            {
+                conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = POKEDEX_DB; integrated security = true;";
+                comando.Connection = conexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "UPDATE pokemons SET numero = @numero, nombre = @nombre, descripcion = @desc, urlimagentapa = @url, idtipo = @idtipo, iddebilidad = @iddebilidad WHERE id = @id ;";
+                comando.Parameters.AddWithValue("numero", pokemon.Numero);
+                comando.Parameters.AddWithValue("nombre",pokemon.Nombre );
+                comando.Parameters.AddWithValue("desc", pokemon.Descripcion);
+                comando.Parameters.AddWithValue("url", pokemon.UrlImagen);
+                comando.Parameters.AddWithValue("idtipo", pokemon.Tipo.Id);
+                comando.Parameters.AddWithValue("iddebilidad", pokemon.Debilidad.Id);
+                comando.Parameters.AddWithValue("id", pokemon.Id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

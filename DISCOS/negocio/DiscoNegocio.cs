@@ -86,7 +86,36 @@ namespace negocio
 			}
 		}
 
-	}
+        public void Modificar(Disco disco)
+		{
+			SqlConnection conexion = new SqlConnection();
+			SqlCommand comando = new SqlCommand();
+			try
+			{
+				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = DISCOS_DB; integrated security= true;";
+				comando.Connection = conexion;
+				comando.CommandType = System.Data.CommandType.Text;
+				comando.CommandText = "UPDATE DISCOS SET titulo = @titulo, fechalanzamiento = @fecha , cantidadcanciones = @cantidad , urlimagentapa = @url, idestilo = @idestilo, idtipoedicion = @idtipoedicion WHERE id = @id;";
+				comando.Parameters.AddWithValue("Id", disco.Id);
+                comando.Parameters.AddWithValue("titulo", disco.Titulo);
+                comando.Parameters.AddWithValue("fecha", disco.FechaLanzamiento);
+                comando.Parameters.AddWithValue("cantidad", disco.CantidadCanciones);
+                comando.Parameters.AddWithValue("url", disco.UrlImagenTapa);
+                comando.Parameters.AddWithValue("idestilo", disco.Estilo.Id);
+                comando.Parameters.AddWithValue("idtipoedicion", disco.Edicion.Id);
+				conexion.Open();
+				comando.ExecuteNonQuery();
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				conexion.Close();
+			}
+        }
+    }
 }
 
 

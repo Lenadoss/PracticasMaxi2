@@ -75,14 +75,22 @@ namespace DISCOS
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
+            Eliminar();
+        }
+
+        private void Eliminar(bool logico = false)
+        {
             try
             {
                 DialogResult respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (respuesta == DialogResult.Yes) 
+                if (respuesta == DialogResult.Yes)
                 {
                     Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
                     DiscoNegocio negocio = new DiscoNegocio();
-                    negocio.Eliminar(seleccionado.Id);
+                    if (logico)
+                        negocio.EliminarLogico(seleccionado.Id);
+                    else
+                        negocio.Eliminar(seleccionado.Id);
                     Cargar();
                 }
 
@@ -91,6 +99,11 @@ namespace DISCOS
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            Eliminar(true);
         }
     }
 }

@@ -78,12 +78,39 @@ namespace PRESENTACION
         {
             try
             {
+                Eliminar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Eliminar(true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Eliminar(bool logico = false)
+        {
+            try
+            {
                 DialogResult Respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(Respuesta == DialogResult.Yes)
+                if (Respuesta == DialogResult.Yes)
                 {
                     Album seleccionado = (Album)dgvAlbumes.CurrentRow.DataBoundItem;
                     AlbumNegocio negocio = new AlbumNegocio();
-                    negocio.Eliminar(seleccionado.Id);
+                    if (logico)
+                        negocio.EliminarLogico(seleccionado.Id);
+                    else
+                        negocio.Eliminar(seleccionado.Id);
                     Cargar();
                 }
             }

@@ -21,7 +21,7 @@ namespace negocio
             {
                 conexion.ConnectionString = "server = (localdb)\\MSSQLLocalDB; database = POKEDEX_DB; integrated security = true;";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT p.id, p.numero, p.nombre, p.descripcion, p.urlimagen, t.descripcion Tipo, d.descripcion Debilidad, p.idtipo, p.iddebilidad FROM Pokemons p, Elementos t, Elementos d WHERE p.idtipo = t.id AND p.iddebilidad = d.id;";
+                comando.CommandText = "SELECT p.id, p.numero, p.nombre, p.descripcion, p.urlimagen, t.descripcion Tipo, d.descripcion Debilidad, p.idtipo, p.iddebilidad FROM Pokemons p, Elementos t, Elementos d WHERE p.idtipo = t.id AND p.iddebilidad = d.id AND Activo = 1;";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -134,6 +134,31 @@ namespace negocio
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        public void EliminarLogico(int id)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = POKEDEX_DB; integrated security = true;";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "UPDATE POKEMONS SET ACTIVO = 0 WHERE ID = @id";
+                comando.Parameters.AddWithValue("id", id);
+                comando.Connection = conexion;
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
             finally

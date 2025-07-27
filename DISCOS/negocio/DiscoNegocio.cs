@@ -21,7 +21,7 @@ namespace negocio
 			{
 				conexion.ConnectionString = "server = (localdb)\\MSSQLlocalDB ; database = DISCOS_DB; integrated security = true; ";
 				comando.CommandType = System.Data.CommandType.Text;
-				comando.CommandText = "SELECT d.id, d.titulo, d.fechalanzamiento, d.cantidadcanciones, d.urlimagentapa, e.descripcion Estilo, te.descripcion Edicion, d.idestilo, d.idtipoedicion FROM discos d, estilos e, tiposedicion te WHERE idestilo = e.id AND idtipoedicion = te.id";
+				comando.CommandText = "SELECT d.id, d.titulo, d.fechalanzamiento, d.cantidadcanciones, d.urlimagentapa, e.descripcion Estilo, te.descripcion Edicion, d.idestilo, d.idtipoedicion FROM discos d, estilos e, tiposedicion te WHERE idestilo = e.id AND idtipoedicion = te.id AND Activo = 1";
 				comando.Connection = conexion;
                 conexion.Open();
 				lector = comando.ExecuteReader();
@@ -132,6 +132,31 @@ namespace negocio
 			}
 			catch (Exception ex)
 			{
+				throw ex;
+			}
+			finally
+			{
+				conexion.Close();
+			}
+        }
+
+        public void EliminarLogico(int id)
+        {
+			SqlConnection conexion = new SqlConnection();
+			SqlCommand comando = new SqlCommand();
+			try
+			{
+				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = DISCOS_DB; integrated security = true;";
+				comando.CommandType = System.Data.CommandType.Text;
+				comando.CommandText = "UPDATE DISCOS SET ACTIVO = 0 WHERE ID = @id";
+				comando.Parameters.AddWithValue("id", id);
+				comando.Connection = conexion;
+				conexion.Open();
+				comando.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+
 				throw ex;
 			}
 			finally

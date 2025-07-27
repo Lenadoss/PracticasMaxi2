@@ -77,14 +77,27 @@ namespace Presentacion
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
+            Eliminar();
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            Eliminar(true);
+        }
+
+        private void Eliminar(bool logico = false)
+        {
             try
             {
                 DialogResult respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(respuesta == DialogResult.Yes)
+                if (respuesta == DialogResult.Yes)
                 {
                     Pokemon seleccionado = (Pokemon)dgvPokemon.CurrentRow.DataBoundItem;
                     PokemonNegocio negocio = new PokemonNegocio();
-                    negocio.EliminarFisico(seleccionado.Id);
+                    if (logico)
+                        negocio.EliminarLogico(seleccionado.Id);
+                    else
+                        negocio.EliminarFisico(seleccionado.Id);
                     Cargar();
                 }
             }

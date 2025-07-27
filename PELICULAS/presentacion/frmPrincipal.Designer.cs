@@ -33,6 +33,7 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.gboxContainer = new System.Windows.Forms.GroupBox();
+            this.btnEliminarLogico = new System.Windows.Forms.Button();
             this.btnEliminarFisico = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcboxPelicula)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPelicula)).BeginInit();
@@ -98,6 +99,7 @@
             // 
             this.gboxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.gboxContainer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gboxContainer.Controls.Add(this.btnEliminarLogico);
             this.gboxContainer.Controls.Add(this.btnEliminarFisico);
             this.gboxContainer.Controls.Add(this.pcboxPelicula);
             this.gboxContainer.Controls.Add(this.btnModificar);
@@ -108,6 +110,20 @@
             this.gboxContainer.Size = new System.Drawing.Size(1087, 367);
             this.gboxContainer.TabIndex = 4;
             this.gboxContainer.TabStop = false;
+            // 
+            // btnEliminarLogico
+            // 
+            this.btnEliminarLogico.FlatAppearance.BorderSize = 3;
+            this.btnEliminarLogico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
+            this.btnEliminarLogico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnEliminarLogico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarLogico.Location = new System.Drawing.Point(450, 309);
+            this.btnEliminarLogico.Name = "btnEliminarLogico";
+            this.btnEliminarLogico.Size = new System.Drawing.Size(140, 45);
+            this.btnEliminarLogico.TabIndex = 5;
+            this.btnEliminarLogico.Text = "Eliminar Logico";
+            this.btnEliminarLogico.UseVisualStyleBackColor = true;
+            this.btnEliminarLogico.Click += new System.EventHandler(this.btnEliminarLogico_Click);
             // 
             // btnEliminarFisico
             // 
@@ -150,6 +166,7 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.GroupBox gboxContainer;
         private System.Windows.Forms.Button btnEliminarFisico;
+        private System.Windows.Forms.Button btnEliminarLogico;
     }
 }
 

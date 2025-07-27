@@ -20,7 +20,7 @@ namespace negocioo
 			{
 				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database=PELICULAS_DB; integrated security = true";
 				comando.CommandType = System.Data.CommandType.Text;
-				comando.CommandText = "SELECT p.id, p.titulo, p.fechalanzamiento, p.urlimagen, p.idgenero, p.idtipoedicion, g.descripcion Genero, te.descripcion Edicion FROM PELICULAS p, GENEROS g, TIPOSEDICION te WHERE p.idgenero = g.id AND p.idtipoedicion = te.id;";
+				comando.CommandText = "SELECT p.id, p.titulo, p.fechalanzamiento, p.urlimagen, p.idgenero, p.idtipoedicion, g.descripcion Genero, te.descripcion Edicion FROM PELICULAS p, GENEROS g, TIPOSEDICION te WHERE p.idgenero = g.id AND p.idtipoedicion = te.id AND Activo = 1;";
 				comando.Connection = conexion;
 				conexion.Open();
 				lector = comando.ExecuteReader();
@@ -132,5 +132,30 @@ namespace negocioo
 				conexion.Close();
 			}
 		}
+
+        public void EliminarLogico(int id)
+        {
+			SqlConnection conexion = new SqlConnection();
+			SqlCommand comando = new SqlCommand();
+			try
+			{
+				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = PELICULAS_DB; integrated security = true;";
+				comando.CommandType = System.Data.CommandType.Text;
+				comando.CommandText = "UPDATE PELICULAS SET Activo = 0 WHERE ID = @id";
+				comando.Parameters.AddWithValue ("id", id);
+				comando.Connection = conexion;
+				conexion.Open();
+				comando.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				conexion.Close();
+			}
+        }
     }
 }

@@ -70,14 +70,22 @@ namespace presentacion
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
+            Eliminar();
+        }
+
+        private void Eliminar(bool logico = false)
+        {
             try
             {
                 DialogResult respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(respuesta == DialogResult.Yes)
+                if (respuesta == DialogResult.Yes)
                 {
                     Pelicula seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
                     NegocioPelicula negocio = new NegocioPelicula();
-                    negocio.Eliminar(seleccionado.Id);
+                    if (logico)
+                        negocio.EliminarLogico(seleccionado.Id);
+                    else
+                        negocio.Eliminar(seleccionado.Id);
                     Cargar();
                 }
             }
@@ -85,6 +93,11 @@ namespace presentacion
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            Eliminar(true);
         }
     }
 }

@@ -67,5 +67,24 @@ namespace presentacion
             string Imagen = Seleccionado.UrlImagen;
             CargarImagen(Imagen);
         }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    Pelicula seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
+                    NegocioPelicula negocio = new NegocioPelicula();
+                    negocio.Eliminar(seleccionado.Id);
+                    Cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

@@ -33,6 +33,7 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.gboxContainer = new System.Windows.Forms.GroupBox();
+            this.btnEliminarFisico = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcboxPelicula)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPelicula)).BeginInit();
             this.gboxContainer.SuspendLayout();
@@ -97,6 +98,7 @@
             // 
             this.gboxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.gboxContainer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gboxContainer.Controls.Add(this.btnEliminarFisico);
             this.gboxContainer.Controls.Add(this.pcboxPelicula);
             this.gboxContainer.Controls.Add(this.btnModificar);
             this.gboxContainer.Controls.Add(this.dgvPelicula);
@@ -106,6 +108,20 @@
             this.gboxContainer.Size = new System.Drawing.Size(1087, 367);
             this.gboxContainer.TabIndex = 4;
             this.gboxContainer.TabStop = false;
+            // 
+            // btnEliminarFisico
+            // 
+            this.btnEliminarFisico.FlatAppearance.BorderSize = 3;
+            this.btnEliminarFisico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
+            this.btnEliminarFisico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnEliminarFisico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarFisico.Location = new System.Drawing.Point(304, 309);
+            this.btnEliminarFisico.Name = "btnEliminarFisico";
+            this.btnEliminarFisico.Size = new System.Drawing.Size(140, 45);
+            this.btnEliminarFisico.TabIndex = 4;
+            this.btnEliminarFisico.Text = "Eliminar Fisico";
+            this.btnEliminarFisico.UseVisualStyleBackColor = true;
+            this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
             // 
             // frmPrincipal
             // 
@@ -133,6 +149,7 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.GroupBox gboxContainer;
+        private System.Windows.Forms.Button btnEliminarFisico;
     }
 }
 

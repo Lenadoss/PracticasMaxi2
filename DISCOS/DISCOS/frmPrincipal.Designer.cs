@@ -32,6 +32,7 @@
             this.dgvDiscos = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminarFisico = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDiscos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).BeginInit();
             this.SuspendLayout();
@@ -83,11 +84,22 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // btnEliminarFisico
+            // 
+            this.btnEliminarFisico.Location = new System.Drawing.Point(270, 342);
+            this.btnEliminarFisico.Name = "btnEliminarFisico";
+            this.btnEliminarFisico.Size = new System.Drawing.Size(117, 33);
+            this.btnEliminarFisico.TabIndex = 4;
+            this.btnEliminarFisico.Text = "Eliminar Fisico";
+            this.btnEliminarFisico.UseVisualStyleBackColor = true;
+            this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 387);
+            this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvDiscos);
@@ -110,6 +122,7 @@
         private System.Windows.Forms.DataGridView dgvDiscos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminarFisico;
     }
 }
 

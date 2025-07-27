@@ -112,5 +112,30 @@ namespace negocio
 				conexion.Close();
 			}
         }
+
+        public void Eliminar(int id)
+        {
+			SqlConnection conexion = new SqlConnection();
+			SqlCommand comando = new SqlCommand();
+			try
+			{
+				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = ALBUMES_DB; integrated security = true";
+				comando.CommandType = System.Data.CommandType.Text;
+				comando.CommandText = "DELETE FROM ALBUMES WHERE ID = @id";
+				comando.Parameters.AddWithValue("id", id);
+				comando.Connection = conexion;
+				conexion.Open();
+				comando.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				conexion.Close();
+			}
+        }
     }
 }

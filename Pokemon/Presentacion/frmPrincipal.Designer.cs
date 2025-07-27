@@ -32,6 +32,7 @@
             this.dgvPokemon = new System.Windows.Forms.DataGridView();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminarFisico = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemon)).BeginInit();
             this.SuspendLayout();
@@ -83,12 +84,24 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // btnEliminarFisico
+            // 
+            this.btnEliminarFisico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnEliminarFisico.Location = new System.Drawing.Point(326, 411);
+            this.btnEliminarFisico.Name = "btnEliminarFisico";
+            this.btnEliminarFisico.Size = new System.Drawing.Size(151, 39);
+            this.btnEliminarFisico.TabIndex = 4;
+            this.btnEliminarFisico.Text = "Eliminar Fisico";
+            this.btnEliminarFisico.UseVisualStyleBackColor = true;
+            this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1300, 462);
+            this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvPokemon);
@@ -109,6 +122,7 @@
         private System.Windows.Forms.DataGridView dgvPokemon;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminarFisico;
     }
 }
 

@@ -72,5 +72,25 @@ namespace DISCOS
             DiscoModificar.ShowDialog();
             Cargar();
         }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes) 
+                {
+                    Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                    DiscoNegocio negocio = new DiscoNegocio();
+                    negocio.Eliminar(seleccionado.Id);
+                    Cargar();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

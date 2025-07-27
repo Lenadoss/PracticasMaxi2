@@ -108,5 +108,29 @@ namespace negocioo
 				conexion.Close();
 			}
         }
+
+        public void Eliminar(int id)
+        {
+			SqlConnection conexion = new SqlConnection();
+			SqlCommand comando = new SqlCommand();
+			try
+			{
+				conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = PELICULAS_DB; integrated security = true;";
+				comando.CommandType= System.Data.CommandType.Text;
+				comando.CommandText = "DELETE FROM PELICULAS WHERE id = @id";
+				comando.Parameters.AddWithValue("id", id);
+				comando.Connection= conexion;
+				conexion.Open();
+				comando.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				conexion.Close();
+			}
+		}
     }
 }

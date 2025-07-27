@@ -73,5 +73,24 @@ namespace PRESENTACION
             frmModificarAlbum.ShowDialog();
             Cargar();
         }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(Respuesta == DialogResult.Yes)
+                {
+                    Album seleccionado = (Album)dgvAlbumes.CurrentRow.DataBoundItem;
+                    AlbumNegocio negocio = new AlbumNegocio();
+                    negocio.Eliminar(seleccionado.Id);
+                    Cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

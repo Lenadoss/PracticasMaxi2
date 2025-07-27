@@ -74,5 +74,24 @@ namespace Presentacion
             modificarPokemon.ShowDialog();
             Cargar();
         }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("Are you sure you want to delete it?", "Deleting...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    Pokemon seleccionado = (Pokemon)dgvPokemon.CurrentRow.DataBoundItem;
+                    PokemonNegocio negocio = new PokemonNegocio();
+                    negocio.EliminarFisico(seleccionado.Id);
+                    Cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace Presentacion
                     negocio.Modificar(pokemon);
                     MessageBox.Show("Pokemon modificado correctamente");
                 }
-                Close();
+                this.Close();
             }
             catch (Exception ex)
             {

@@ -34,6 +34,9 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminarFisico = new System.Windows.Forms.Button();
             this.btnEliminarLogico = new System.Windows.Forms.Button();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.lblFiltro = new System.Windows.Forms.Label();
+            this.btnFiltro = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDiscos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).BeginInit();
             this.SuspendLayout();
@@ -105,11 +108,40 @@
             this.btnEliminarLogico.UseVisualStyleBackColor = true;
             this.btnEliminarLogico.Click += new System.EventHandler(this.btnEliminarLogico_Click);
             // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(97, 12);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(185, 22);
+            this.txtFiltro.TabIndex = 7;
+            // 
+            // lblFiltro
+            // 
+            this.lblFiltro.AutoSize = true;
+            this.lblFiltro.Location = new System.Drawing.Point(48, 15);
+            this.lblFiltro.Name = "lblFiltro";
+            this.lblFiltro.Size = new System.Drawing.Size(36, 16);
+            this.lblFiltro.TabIndex = 6;
+            this.lblFiltro.Text = "Filtro";
+            // 
+            // btnFiltro
+            // 
+            this.btnFiltro.Location = new System.Drawing.Point(291, 7);
+            this.btnFiltro.Name = "btnFiltro";
+            this.btnFiltro.Size = new System.Drawing.Size(96, 32);
+            this.btnFiltro.TabIndex = 8;
+            this.btnFiltro.Text = "Filtro";
+            this.btnFiltro.UseVisualStyleBackColor = true;
+            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 387);
+            this.Controls.Add(this.btnFiltro);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.btnEliminarLogico);
             this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnModificar);
@@ -125,6 +157,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbxDiscos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -136,6 +169,9 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminarFisico;
         private System.Windows.Forms.Button btnEliminarLogico;
+        private System.Windows.Forms.TextBox txtFiltro;
+        private System.Windows.Forms.Label lblFiltro;
+        private System.Windows.Forms.Button btnFiltro;
     }
 }
 

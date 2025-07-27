@@ -27,10 +27,13 @@ namespace Presentacion
 
         private void dgvPokemon_SelectionChanged(object sender, EventArgs e)
         {
-            Pokemon seleccionado = new Pokemon();
-            seleccionado = (Pokemon)dgvPokemon.CurrentRow.DataBoundItem;
-            string imagen = seleccionado.UrlImagen;
-            CargarImagen(imagen);
+            if(dgvPokemon.CurrentRow != null)
+            {
+                Pokemon seleccionado;
+                seleccionado = (Pokemon)dgvPokemon.CurrentRow.DataBoundItem;
+                string imagen = seleccionado.UrlImagen;
+                CargarImagen(imagen);
+            }
         }
 
         private void CargarImagen(string imagen)
@@ -52,7 +55,7 @@ namespace Presentacion
             {
                 listaPokemons = negocio.listar();
                 dgvPokemon.DataSource = listaPokemons;
-                dgvPokemon.Columns["urlimagen"].Visible = false;
+                ocultarColumnas();
             }
             catch (Exception ex)
             {
@@ -100,6 +103,42 @@ namespace Presentacion
                         negocio.EliminarFisico(seleccionado.Id);
                     Cargar();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void ocultarColumnas()
+        {
+            try
+            {
+                dgvPokemon.Columns["urlimagen"].Visible = false;
+                dgvPokemon.Columns["id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            List<Pokemon> listaFiltrada;
+            string filtro = txtFiltro.Text;
+            try
+            {
+                if (filtro != "")
+                {
+                    listaFiltrada = listaPokemons.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+                }
+                else
+                {
+                    listaFiltrada = listaPokemons;
+                }
+                dgvPokemon.DataSource = listaFiltrada;
+                ocultarColumnas();
             }
             catch (Exception ex)
             {

@@ -29,9 +29,20 @@ namespace PRESENTACION
 
         private void dgvAlbumes_SelectionChanged(object sender, EventArgs e)
         {
-            Album seleccionado = (Album)dgvAlbumes.CurrentRow.DataBoundItem;
-            string imagen = seleccionado.UrlImagenCover;
-            CargarImagen(imagen);
+            try
+            {
+                if(dgvAlbumes.CurrentRow != null)
+                {
+                    Album seleccionado = (Album)dgvAlbumes.CurrentRow.DataBoundItem;
+                    string imagen = seleccionado.UrlImagenCover;
+                    CargarImagen(imagen);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void Cargar()
@@ -41,10 +52,24 @@ namespace PRESENTACION
             {
                 listaAlbumes = negocio.listar();
                 dgvAlbumes.DataSource = listaAlbumes;
-                dgvAlbumes.Columns["UrlImagenCover"].Visible=false;
+                ocultarColumnas();
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+
+        private void ocultarColumnas()
+        {
+            try
+            {
+                dgvAlbumes.Columns["UrlImagenCover"].Visible = false;
+                dgvAlbumes.Columns["id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
         }
@@ -117,6 +142,31 @@ namespace PRESENTACION
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            string Filtro = txtFiltro.Text;
+            List<Album> listaFiltrada;
+            try
+            {
+                if (Filtro != null)
+                {
+                    listaFiltrada = listaAlbumes.FindAll(x => x.Titulo.ToUpper().Contains(Filtro.ToUpper()) || x.Genero.Descripcion.ToUpper().Contains(Filtro.ToUpper()));
+                }
+                else
+                {
+                    listaFiltrada = listaAlbumes;
+                }
+                dgvAlbumes.DataSource = null;
+                dgvAlbumes.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
             }
         }
     }

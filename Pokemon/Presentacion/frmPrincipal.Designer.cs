@@ -34,6 +34,9 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminarFisico = new System.Windows.Forms.Button();
             this.btnEliminarLogico = new System.Windows.Forms.Button();
+            this.lblFiltro = new System.Windows.Forms.Label();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.btnFiltro = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemon)).BeginInit();
             this.SuspendLayout();
@@ -107,12 +110,42 @@
             this.btnEliminarLogico.UseVisualStyleBackColor = true;
             this.btnEliminarLogico.Click += new System.EventHandler(this.btnEliminarLogico_Click);
             // 
+            // lblFiltro
+            // 
+            this.lblFiltro.AutoSize = true;
+            this.lblFiltro.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.lblFiltro.Location = new System.Drawing.Point(28, 19);
+            this.lblFiltro.Name = "lblFiltro";
+            this.lblFiltro.Size = new System.Drawing.Size(36, 16);
+            this.lblFiltro.TabIndex = 6;
+            this.lblFiltro.Text = "Filtro";
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(70, 16);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(233, 22);
+            this.txtFiltro.TabIndex = 7;
+            // 
+            // btnFiltro
+            // 
+            this.btnFiltro.Location = new System.Drawing.Point(309, 16);
+            this.btnFiltro.Name = "btnFiltro";
+            this.btnFiltro.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltro.TabIndex = 8;
+            this.btnFiltro.Text = "Buscar";
+            this.btnFiltro.UseVisualStyleBackColor = true;
+            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1300, 462);
+            this.Controls.Add(this.btnFiltro);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.btnEliminarLogico);
             this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnModificar);
@@ -126,6 +159,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemon)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -137,6 +171,9 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminarFisico;
         private System.Windows.Forms.Button btnEliminarLogico;
+        private System.Windows.Forms.Label lblFiltro;
+        private System.Windows.Forms.TextBox txtFiltro;
+        private System.Windows.Forms.Button btnFiltro;
     }
 }
 

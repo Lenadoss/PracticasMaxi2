@@ -32,7 +32,7 @@ namespace DISCOS
             {
                 Discos = negocio.Listar();
                 dgvDiscos.DataSource = Discos;
-                dgvDiscos.Columns["urlimagentapa"].Visible = false;
+                ocultarColumnas();
             }
             catch (Exception ex)
             {
@@ -40,10 +40,27 @@ namespace DISCOS
             }
         }
 
+        private void ocultarColumnas()
+        {
+            try
+            {
+                dgvDiscos.Columns["urlimagentapa"].Visible = false;
+                dgvDiscos.Columns["id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         private void dgvDiscos_SelectionChanged(object sender, EventArgs e)
         {
-            Disco DiscoSeleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            CargarImagen(DiscoSeleccionado.UrlImagenTapa);
+            if(dgvDiscos.CurrentRow != null)
+            {
+                Disco DiscoSeleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                CargarImagen(DiscoSeleccionado.UrlImagenTapa);
+            }
         }
 
         private void CargarImagen(string imagen)
@@ -104,6 +121,32 @@ namespace DISCOS
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
             Eliminar(true);
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            string Filtro = txtFiltro.Text;
+            List<Disco> listaFiltrada;
+            try
+            {
+                if(Filtro != "")
+                {
+                    listaFiltrada = Discos.FindAll(x => x.Titulo.ToUpper().Contains(Filtro.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(Filtro.ToUpper()));
+                }
+                else
+                {
+                    listaFiltrada = Discos;
+                }
+                dgvDiscos.DataSource = null;
+                dgvDiscos.DataSource = listaFiltrada;
+                ocultarColumnas();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

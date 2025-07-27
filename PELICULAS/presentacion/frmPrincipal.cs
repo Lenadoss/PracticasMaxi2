@@ -63,9 +63,12 @@ namespace presentacion
 
         private void dgvPelicula_SelectionChanged(object sender, EventArgs e)
         {
-            Pelicula Seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
-            string Imagen = Seleccionado.UrlImagen;
-            CargarImagen(Imagen);
+            if(dgvPelicula.CurrentRow != null)
+            {
+                Pelicula Seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
+                string Imagen = Seleccionado.UrlImagen;
+                CargarImagen(Imagen);
+            }
         }
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
@@ -98,6 +101,44 @@ namespace presentacion
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
             Eliminar(true);
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            string filtro = txtFiltro.Text;
+            List<Pelicula> listaFiltrada;
+            try
+            {
+                if(filtro != "")
+                {
+                    listaFiltrada = listaPeliculas.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Genero.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+                }
+                else
+                {
+                    listaFiltrada = listaPeliculas;
+                }
+                dgvPelicula.DataSource = null;
+                dgvPelicula.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void ocultarColumnas()
+        {
+            try
+            {
+                dgvPelicula.Columns["urlimagen"].Visible = false;
+                dgvPelicula.Columns["id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

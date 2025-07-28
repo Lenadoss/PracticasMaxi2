@@ -125,13 +125,18 @@ namespace DISCOS
 
         private void btnFiltro_Click(object sender, EventArgs e)
         {
-            string Filtro = txtFiltro.Text;
+            
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtFiltro.Text;
             List<Disco> listaFiltrada;
             try
             {
-                if(Filtro != "")
+                if (filtro.Length > 2)
                 {
-                    listaFiltrada = Discos.FindAll(x => x.Titulo.ToUpper().Contains(Filtro.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(Filtro.ToUpper()));
+                    listaFiltrada = Discos.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
                 }
                 else
                 {
@@ -140,7 +145,6 @@ namespace DISCOS
                 dgvDiscos.DataSource = null;
                 dgvDiscos.DataSource = listaFiltrada;
                 ocultarColumnas();
-
             }
             catch (Exception ex)
             {

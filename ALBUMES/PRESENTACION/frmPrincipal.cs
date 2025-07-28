@@ -147,11 +147,16 @@ namespace PRESENTACION
 
         private void btnFiltro_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
             string Filtro = txtFiltro.Text;
             List<Album> listaFiltrada;
             try
             {
-                if (Filtro != null)
+                if (Filtro.Length > 2)
                 {
                     listaFiltrada = listaAlbumes.FindAll(x => x.Titulo.ToUpper().Contains(Filtro.ToUpper()) || x.Genero.Descripcion.ToUpper().Contains(Filtro.ToUpper()));
                 }

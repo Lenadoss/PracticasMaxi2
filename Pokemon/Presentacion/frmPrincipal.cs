@@ -145,5 +145,30 @@ namespace Presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            string Filtro = txtFiltro.Text;
+            List<Pokemon> listaFiltrada;
+            try
+            {
+                if (Filtro.Length > 2)
+                {
+                    listaFiltrada = listaPokemons.FindAll(x => x.Nombre.ToUpper().Contains(Filtro.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Filtro.ToUpper()));
+                }
+                else
+                {
+                    listaFiltrada = listaPokemons;
+                }
+                dgvPokemon.DataSource = null;
+                dgvPokemon.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

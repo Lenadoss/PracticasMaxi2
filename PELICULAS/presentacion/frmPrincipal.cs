@@ -140,5 +140,30 @@ namespace presentacion
                 throw ex;
             }
         }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtFiltro.Text;
+            List<Pelicula> listaFiltrada;
+            try
+            {
+                if (filtro.Length > 2)
+                {
+                    listaFiltrada = listaPeliculas.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Genero.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+                }
+                else
+                {
+                    listaFiltrada = listaPeliculas;
+                }
+                dgvPelicula.DataSource = null;
+                dgvPelicula.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

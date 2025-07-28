@@ -33,11 +33,11 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.gboxContainer = new System.Windows.Forms.GroupBox();
-            this.btnEliminarLogico = new System.Windows.Forms.Button();
-            this.btnEliminarFisico = new System.Windows.Forms.Button();
+            this.btnFiltro = new System.Windows.Forms.Button();
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.lblFiltro = new System.Windows.Forms.Label();
-            this.btnFiltro = new System.Windows.Forms.Button();
+            this.btnEliminarLogico = new System.Windows.Forms.Button();
+            this.btnEliminarFisico = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcboxPelicula)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPelicula)).BeginInit();
             this.gboxContainer.SuspendLayout();
@@ -117,6 +117,33 @@
             this.gboxContainer.TabIndex = 4;
             this.gboxContainer.TabStop = false;
             // 
+            // btnFiltro
+            // 
+            this.btnFiltro.Location = new System.Drawing.Point(953, 21);
+            this.btnFiltro.Name = "btnFiltro";
+            this.btnFiltro.Size = new System.Drawing.Size(116, 36);
+            this.btnFiltro.TabIndex = 12;
+            this.btnFiltro.Text = "Filtro";
+            this.btnFiltro.UseVisualStyleBackColor = true;
+            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(62, 28);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(236, 22);
+            this.txtFiltro.TabIndex = 8;
+            this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
+            // 
+            // lblFiltro
+            // 
+            this.lblFiltro.AutoSize = true;
+            this.lblFiltro.Location = new System.Drawing.Point(13, 31);
+            this.lblFiltro.Name = "lblFiltro";
+            this.lblFiltro.Size = new System.Drawing.Size(36, 16);
+            this.lblFiltro.TabIndex = 7;
+            this.lblFiltro.Text = "Filtro";
+            // 
             // btnEliminarLogico
             // 
             this.btnEliminarLogico.FlatAppearance.BorderSize = 3;
@@ -144,32 +171,6 @@
             this.btnEliminarFisico.Text = "Eliminar Fisico";
             this.btnEliminarFisico.UseVisualStyleBackColor = true;
             this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
-            // 
-            // txtFiltro
-            // 
-            this.txtFiltro.Location = new System.Drawing.Point(62, 28);
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(226, 22);
-            this.txtFiltro.TabIndex = 8;
-            // 
-            // lblFiltro
-            // 
-            this.lblFiltro.AutoSize = true;
-            this.lblFiltro.Location = new System.Drawing.Point(13, 31);
-            this.lblFiltro.Name = "lblFiltro";
-            this.lblFiltro.Size = new System.Drawing.Size(36, 16);
-            this.lblFiltro.TabIndex = 7;
-            this.lblFiltro.Text = "Filtro";
-            // 
-            // btnFiltro
-            // 
-            this.btnFiltro.Location = new System.Drawing.Point(294, 21);
-            this.btnFiltro.Name = "btnFiltro";
-            this.btnFiltro.Size = new System.Drawing.Size(116, 36);
-            this.btnFiltro.TabIndex = 12;
-            this.btnFiltro.Text = "Filtro";
-            this.btnFiltro.UseVisualStyleBackColor = true;
-            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
             // 
             // frmPrincipal
             // 

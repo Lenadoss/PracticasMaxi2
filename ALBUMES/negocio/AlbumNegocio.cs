@@ -1,10 +1,11 @@
-﻿using System;
+﻿using dominio;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using dominio;
 
 namespace negocio
 {
@@ -33,7 +34,8 @@ namespace negocio
 					aux.Id = (int)lector["id"];
 					aux.Titulo = (string)lector["titulo"];
 					aux.FechaLanzamiento = (DateTime)lector["fechalanzamiento"];
-					aux.UrlImagenCover = (string)lector["urlimagencover"];
+                    if(!(lector["UrlImagenCover"]is DBNull))
+					    aux.UrlImagenCover = (string)lector["urlimagencover"];
 					aux.Genero = new Genero();
 					aux.Genero.Id = (int)lector["idgenero"];
 					aux.Genero.Descripcion = (string)lector["GENERO"];
@@ -160,6 +162,104 @@ namespace negocio
 			{
 				conexion.Close();
 			}
+        }
+        public List<Album> Filtrar(string campo, string criterio, string filtro)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            List<Album> listaFiltrada = new List<Album>();
+            string consulta = "SELECT a.id, a.titulo, a.fechalanzamiento, a.urlimagencover, g.descripcion GENERO, te.descripcion EDICION, a.idgenero, a.idtipoedicion FROM ALBUMES a, GENEROS g, TIPOSEDICION te WHERE a.idgenero = g.id AND a.idtipoedicion = te.id AND Activo = 1 AND ";
+            try
+            {
+                switch (campo)
+                {
+                    case "Id":
+                        switch (criterio)
+                        {
+                            case "Mayor que":
+                                consulta += "a.id > " + filtro;
+                                break;
+
+                            case "Menor que":
+                                consulta += "a.id < " + filtro;
+                                break;
+
+                            case "Igual que":
+                                consulta += "a.id = " + filtro;
+                                break;
+                        }
+                        break;
+
+                    case "Titulo":
+                        switch (criterio)
+                        {
+                            case "Contiene":
+                                consulta += "a.titulo LIKE '%" + filtro + "%' ";
+                                break;
+
+                            case "Empieza con":
+                                consulta += "a.titulo LIKE '" + filtro + "%' ";
+                                break;
+
+                            case "Termina con":
+                                consulta += "a.titulo LIKE '%" + filtro + "' ";
+                                break;
+                        }
+                        break;
+
+                    case "Genero":
+                        switch (criterio)
+                        {
+                            case "Contiene":
+                                consulta += "g.descripcion LIKE '%" + filtro + "%' ";
+                                break;
+
+                            case "Empieza con":
+                                consulta += "g.descripcion LIKE '" + filtro + "%' ";
+                                break;
+
+                            case "Termina con":
+                                consulta += "g.descripcion LIKE '%" + filtro + "' ";
+                                break;
+                        }
+                        break;
+                }
+                conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = ALBUMES_DB; integrated security = true;";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = consulta;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    Album aux = new Album();
+                    aux.Id = (int)lector["id"];
+                    aux.Titulo = (string)lector["titulo"];
+                    aux.FechaLanzamiento = (DateTime)lector["fechalanzamiento"];
+                    if (!(lector["UrlImagenCover"] is DBNull))
+                        aux.UrlImagenCover = (string)lector["urlimagencover"];
+                    aux.Genero = new Genero();
+                    aux.Genero.Id = (int)lector["idgenero"];
+                    aux.Genero.Descripcion = (string)lector["GENERO"];
+                    aux.Edicion = new Edicion();
+                    aux.Edicion.Id = (int)lector["idtipoedicion"];
+                    aux.Edicion.Descripcion = (string)lector["EDICION"];
+
+                    listaFiltrada.Add(aux);
+                }
+                lector?.Close();
+                return listaFiltrada;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
     }
 }

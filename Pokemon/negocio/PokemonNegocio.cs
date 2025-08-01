@@ -1,10 +1,11 @@
-﻿using System;
+﻿using dominio;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using dominio;
 
 namespace negocio
 {
@@ -33,13 +34,8 @@ namespace negocio
                     aux.Numero = (int)lector["numero"];
                     aux.Nombre = (string)lector["nombre"];
                     aux.Descripcion = (string)lector["descripcion"];
-
-                    //if (!(lector.IsDBNull(lector.GetOrdinal("urlimagen")))) //Puedes hacer esto, llamdno la funcion y pasandole por parametro el valor que te devuelve el lector de esa columna en la tabla.
-                    //    aux.UrlImagen = (string)lector["urlimagen"];
-
                     if (!(lector["urlimagen"] is DBNull))
                         aux.UrlImagen = (string)lector["urlimagen"];
-
                     aux.Tipo = new Elemento();
                     aux.Tipo.Id = (int)lector["idtipo"];
                     aux.Tipo.Descripcion = (string)lector["Tipo"];
@@ -155,6 +151,104 @@ namespace negocio
                 comando.Connection = conexion;
                 conexion.Open();
                 comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        public List<Pokemon> Filtrar(string campo, string criterio, string filtro)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            List<Pokemon> listaFiltrada = new List<Pokemon>();
+            try
+            {
+                string consulta = "SELECT p.id, p.numero, p.nombre, p.descripcion, p.urlimagen, t.descripcion Tipo, d.descripcion Debilidad, p.idtipo, p.iddebilidad FROM Pokemons p, Elementos t, Elementos d WHERE p.idtipo = t.id AND p.iddebilidad = d.id AND Activo = 1 And ";
+                switch(campo)
+                {
+                    case "Numero":
+                        switch (criterio)
+                        {
+                            case "Mayor que":
+                                consulta += "p.Numero > " + filtro;
+                                break;
+
+                            case "Menor que":
+                                consulta += "p.Numero < " + filtro;
+                                break;
+
+                            case "Igual que":
+                                consulta += "p.Numero = " + filtro;
+                                break;
+                        }
+                        break;
+
+                    case "Nombre":
+                        switch (criterio)
+                        {
+                            case "Contiene":
+                                consulta += "p.Nombre LIKE '%"+filtro+"%'";
+                                break;
+
+                            case "Empieza con":
+                                consulta += "p.Nombre LIKE '"+filtro+"%'";
+                                break;
+
+                            case "Termina con":
+                                consulta += "p.Nombre LIKE '%"+filtro+"'";
+                                break;
+                        }
+                        break;
+                    case "Descripcion":
+                        switch (criterio)
+                        {
+                            case "Contiene":
+                                consulta += "p.Descripcion LIKE '%" + filtro + "%'";
+                                break;
+
+                            case "Empieza con":
+                                consulta += "p.Descripcion LIKE '" + filtro + "%'";
+                                break;
+
+                            case "Termina con":
+                                consulta += "p.Descripcion LIKE '%" + filtro + "'";
+                                break;
+                        }
+                        break;
+                }
+                conexion.ConnectionString = "server=(localdb)\\MSSQLLocalDB; database = POKEDEX_DB; integrated security = true;";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = consulta;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    Pokemon aux = new Pokemon();
+                    aux.Id = (int)lector["id"];
+                    aux.Numero = (int)lector["numero"];
+                    aux.Nombre = (string)lector["nombre"];
+                    aux.Descripcion = (string)lector["descripcion"];
+                    if (!(lector["urlimagen"] is DBNull))
+                        aux.UrlImagen = (string)lector["urlimagen"];
+                    aux.Tipo = new Elemento();
+                    aux.Tipo.Id = (int)lector["idtipo"];
+                    aux.Tipo.Descripcion = (string)lector["Tipo"];
+                    aux.Debilidad = new Elemento();
+                    aux.Debilidad.Id = (int)lector["iddebilidad"];
+                    aux.Debilidad.Descripcion = (string)lector["Debilidad"];
+
+                    listaFiltrada.Add(aux);
+                }
+                return listaFiltrada;
             }
             catch (Exception ex)
             {

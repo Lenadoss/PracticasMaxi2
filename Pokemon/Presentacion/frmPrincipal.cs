@@ -23,6 +23,9 @@ namespace Presentacion
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             Cargar();
+            cbBoxCampo.Items.Add("Numero");
+            cbBoxCampo.Items.Add("Nombre");
+            cbBoxCampo.Items.Add("Descripcion");
         }
 
         private void dgvPokemon_SelectionChanged(object sender, EventArgs e)
@@ -163,6 +166,50 @@ namespace Presentacion
                 dgvPokemon.DataSource = null;
                 dgvPokemon.DataSource = listaFiltrada;
                 ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void cbBoxCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string opcion = cbBoxCampo.SelectedItem.ToString();
+                if (opcion == "Numero")
+                {
+                    cbBoxCriterio.Items.Clear();
+                    cbBoxCriterio.Items.Add("Mayor que");
+                    cbBoxCriterio.Items.Add("Menor que");
+                    cbBoxCriterio.Items.Add("Igual que");
+                }
+                else
+                {
+                    cbBoxCriterio.Items.Clear();
+                    cbBoxCriterio.Items.Add("Contiene");
+                    cbBoxCriterio.Items.Add("Empieza con");
+                    cbBoxCriterio.Items.Add("Termina con");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string campo = cbBoxCampo.SelectedItem.ToString();
+                string criterio = cbBoxCriterio.SelectedItem.ToString();
+                string filtro = txtBuscarAvanzado.Text;
+                PokemonNegocio negocio = new PokemonNegocio();
+                dgvPokemon.DataSource = negocio.Filtrar(campo, criterio, filtro);
             }
             catch (Exception ex)
             {

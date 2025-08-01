@@ -33,6 +33,13 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.gboxContainer = new System.Windows.Forms.GroupBox();
+            this.cbBoxcriterio = new System.Windows.Forms.ComboBox();
+            this.lblFiltrar = new System.Windows.Forms.Label();
+            this.lblCriterio = new System.Windows.Forms.Label();
+            this.lblCampo = new System.Windows.Forms.Label();
+            this.cbBoxCampo = new System.Windows.Forms.ComboBox();
+            this.txtFiltrar = new System.Windows.Forms.TextBox();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.btnFiltro = new System.Windows.Forms.Button();
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.lblFiltro = new System.Windows.Forms.Label();
@@ -102,6 +109,13 @@
             // 
             this.gboxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.gboxContainer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gboxContainer.Controls.Add(this.cbBoxcriterio);
+            this.gboxContainer.Controls.Add(this.lblFiltrar);
+            this.gboxContainer.Controls.Add(this.lblCriterio);
+            this.gboxContainer.Controls.Add(this.lblCampo);
+            this.gboxContainer.Controls.Add(this.cbBoxCampo);
+            this.gboxContainer.Controls.Add(this.txtFiltrar);
+            this.gboxContainer.Controls.Add(this.btnFiltrar);
             this.gboxContainer.Controls.Add(this.btnFiltro);
             this.gboxContainer.Controls.Add(this.txtFiltro);
             this.gboxContainer.Controls.Add(this.lblFiltro);
@@ -113,9 +127,72 @@
             this.gboxContainer.Controls.Add(this.btnAgregar);
             this.gboxContainer.Location = new System.Drawing.Point(12, 12);
             this.gboxContainer.Name = "gboxContainer";
-            this.gboxContainer.Size = new System.Drawing.Size(1087, 419);
+            this.gboxContainer.Size = new System.Drawing.Size(1087, 465);
             this.gboxContainer.TabIndex = 4;
             this.gboxContainer.TabStop = false;
+            // 
+            // cbBoxcriterio
+            // 
+            this.cbBoxcriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBoxcriterio.FormattingEnabled = true;
+            this.cbBoxcriterio.Location = new System.Drawing.Point(323, 426);
+            this.cbBoxcriterio.Name = "cbBoxcriterio";
+            this.cbBoxcriterio.Size = new System.Drawing.Size(198, 24);
+            this.cbBoxcriterio.TabIndex = 15;
+            // 
+            // lblFiltrar
+            // 
+            this.lblFiltrar.AutoSize = true;
+            this.lblFiltrar.Location = new System.Drawing.Point(531, 429);
+            this.lblFiltrar.Name = "lblFiltrar";
+            this.lblFiltrar.Size = new System.Drawing.Size(40, 16);
+            this.lblFiltrar.TabIndex = 14;
+            this.lblFiltrar.Text = "Filtrar";
+            // 
+            // lblCriterio
+            // 
+            this.lblCriterio.AutoSize = true;
+            this.lblCriterio.Location = new System.Drawing.Point(275, 429);
+            this.lblCriterio.Name = "lblCriterio";
+            this.lblCriterio.Size = new System.Drawing.Size(49, 16);
+            this.lblCriterio.TabIndex = 13;
+            this.lblCriterio.Text = "Criterio";
+            // 
+            // lblCampo
+            // 
+            this.lblCampo.AutoSize = true;
+            this.lblCampo.Location = new System.Drawing.Point(13, 429);
+            this.lblCampo.Name = "lblCampo";
+            this.lblCampo.Size = new System.Drawing.Size(51, 16);
+            this.lblCampo.TabIndex = 5;
+            this.lblCampo.Text = "Campo";
+            // 
+            // cbBoxCampo
+            // 
+            this.cbBoxCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBoxCampo.FormattingEnabled = true;
+            this.cbBoxCampo.Location = new System.Drawing.Point(70, 426);
+            this.cbBoxCampo.Name = "cbBoxCampo";
+            this.cbBoxCampo.Size = new System.Drawing.Size(199, 24);
+            this.cbBoxCampo.TabIndex = 6;
+            this.cbBoxCampo.SelectedIndexChanged += new System.EventHandler(this.cbBoxCampo_SelectedIndexChanged);
+            // 
+            // txtFiltrar
+            // 
+            this.txtFiltrar.Location = new System.Drawing.Point(577, 426);
+            this.txtFiltrar.Name = "txtFiltrar";
+            this.txtFiltrar.Size = new System.Drawing.Size(198, 22);
+            this.txtFiltrar.TabIndex = 7;
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Location = new System.Drawing.Point(790, 427);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 8;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
             // btnFiltro
             // 
@@ -177,7 +254,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1111, 434);
+            this.ClientSize = new System.Drawing.Size(1111, 489);
             this.Controls.Add(this.gboxContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "frmPrincipal";
@@ -204,6 +281,13 @@
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.Button btnFiltro;
+        private System.Windows.Forms.ComboBox cbBoxcriterio;
+        private System.Windows.Forms.Label lblFiltrar;
+        private System.Windows.Forms.Label lblCriterio;
+        private System.Windows.Forms.Label lblCampo;
+        private System.Windows.Forms.ComboBox cbBoxCampo;
+        private System.Windows.Forms.TextBox txtFiltrar;
+        private System.Windows.Forms.Button btnFiltrar;
     }
 }
 

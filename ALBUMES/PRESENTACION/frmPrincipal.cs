@@ -89,6 +89,10 @@ namespace PRESENTACION
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             Cargar();
+            cbBoxCampo.Items.Clear();
+            cbBoxCampo.Items.Add("Id");
+            cbBoxCampo.Items.Add("Titulo");
+            cbBoxCampo.Items.Add("Genero");
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -167,6 +171,50 @@ namespace PRESENTACION
                 dgvAlbumes.DataSource = null;
                 dgvAlbumes.DataSource = listaFiltrada;
                 ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void cbBoxCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string campo = cbBoxCampo.SelectedItem.ToString();
+                if (campo == "Id")
+                {
+                    cbBoxCriterio.Items.Clear();
+                    cbBoxCriterio.Items.Add("Mayor que");
+                    cbBoxCriterio.Items.Add("Menor que");
+                    cbBoxCriterio.Items.Add("Igual que");
+                }
+                else
+                {
+                    cbBoxCriterio.Items.Clear();
+                    cbBoxCriterio.Items.Add("Contiene");
+                    cbBoxCriterio.Items.Add("Empieza con");
+                    cbBoxCriterio.Items.Add("Termina con");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string campo = cbBoxCampo.SelectedItem.ToString();
+                string criterio = cbBoxCriterio.SelectedItem.ToString();
+                string filtro = txtFiltrar.Text;
+                AlbumNegocio negocio = new AlbumNegocio();
+                dgvAlbumes.DataSource = negocio.Filtrar(campo,criterio,filtro);
             }
             catch (Exception ex)
             {

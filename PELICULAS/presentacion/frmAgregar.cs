@@ -9,12 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using System.IO;
 
 namespace presentacion
 {
     public partial class frmAgregar : Form
     {
         private Pelicula pelicula = null;
+        private OpenFileDialog archivo = null;
         public frmAgregar()
         {
             InitializeComponent();
@@ -55,7 +58,11 @@ namespace presentacion
                     negocio.Modificar(pelicula);
                     MessageBox.Show("Pelicula modificada exitosamente!");
                 }
-                    this.Close();
+
+                if (archivo != null && !(txtUrl.Text.ToUpper().Contains("HTTP")))
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -109,6 +116,25 @@ namespace presentacion
             catch (Exception)
             {
                 pcboxPelicula.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+            }
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                archivo = new OpenFileDialog();
+                archivo.Filter = "jpg|*.jpg;|png|*.png;|jpeg Image|*.jpeg";
+                if(archivo.ShowDialog() == DialogResult.OK)
+                {
+                    txtUrl.Text = archivo.FileName;
+                    CargarImagen(archivo.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
             }
         }
     }

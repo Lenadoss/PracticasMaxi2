@@ -97,16 +97,35 @@ namespace PRESENTACION
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Album seleccionado = (Album)dgvAlbumes.CurrentRow.DataBoundItem;
-            frmAgregarAlbum frmModificarAlbum = new frmAgregarAlbum(seleccionado);
-            frmModificarAlbum.ShowDialog();
-            Cargar();
+            try
+            {
+                if(dgvAlbumes.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un album a modificar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Album seleccionado = (Album)dgvAlbumes.CurrentRow.DataBoundItem;
+                frmAgregarAlbum frmModificarAlbum = new frmAgregarAlbum(seleccionado);
+                frmModificarAlbum.ShowDialog();
+                Cargar();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
             try
             {
+                if (dgvAlbumes.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un album a eliminar fisico.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 Eliminar();
             }
             catch (Exception ex)
@@ -119,6 +138,11 @@ namespace PRESENTACION
         {
             try
             {
+                if (dgvAlbumes.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un album a modificar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 Eliminar(true);
             }
             catch (Exception ex)
@@ -210,6 +234,8 @@ namespace PRESENTACION
         {
             try
             {
+                if (validarFiltro())
+                    return;
                 string campo = cbBoxCampo.SelectedItem.ToString();
                 string criterio = cbBoxCriterio.SelectedItem.ToString();
                 string filtro = txtFiltrar.Text;
@@ -221,6 +247,44 @@ namespace PRESENTACION
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private bool validarFiltro()
+        {
+            if(cbBoxCampo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Seleccione campo a filtrar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            } 
+            if(cbBoxCriterio.SelectedIndex == -1)
+            {
+                MessageBox.Show("Seleccione criterio a filtrar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            if (cbBoxCampo.SelectedItem.ToString() == "Id")
+            {
+                if (string.IsNullOrEmpty(txtFiltrar.Text))
+                {
+                    MessageBox.Show("No puede dejar el filtro vacio para filtrar por Id.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+                if (soloNumeros(txtFiltrar.Text))
+                {
+                    MessageBox.Show("Solo puede digitar numeros si filtra por Id.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool soloNumeros(string cadena)
+        {
+            foreach(char caracter in cadena)
+            {
+                if (char.IsNumber(caracter))
+                    return false;
+            }
+            return true;
         }
     }
 }

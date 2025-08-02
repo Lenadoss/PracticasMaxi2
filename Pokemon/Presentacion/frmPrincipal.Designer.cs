@@ -36,7 +36,6 @@
             this.btnEliminarLogico = new System.Windows.Forms.Button();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.txtFiltro = new System.Windows.Forms.TextBox();
-            this.btnFiltro = new System.Windows.Forms.Button();
             this.lblCampo = new System.Windows.Forms.Label();
             this.cbBoxCampo = new System.Windows.Forms.ComboBox();
             this.cbBoxCriterio = new System.Windows.Forms.ComboBox();
@@ -135,16 +134,6 @@
             this.txtFiltro.TabIndex = 7;
             this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
             // 
-            // btnFiltro
-            // 
-            this.btnFiltro.Location = new System.Drawing.Point(1156, 16);
-            this.btnFiltro.Name = "btnFiltro";
-            this.btnFiltro.Size = new System.Drawing.Size(75, 23);
-            this.btnFiltro.TabIndex = 8;
-            this.btnFiltro.Text = "Buscar";
-            this.btnFiltro.UseVisualStyleBackColor = true;
-            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
-            // 
             // lblCampo
             // 
             this.lblCampo.AutoSize = true;
@@ -221,7 +210,6 @@
             this.Controls.Add(this.cbBoxCriterio);
             this.Controls.Add(this.cbBoxCampo);
             this.Controls.Add(this.lblCampo);
-            this.Controls.Add(this.btnFiltro);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.btnEliminarLogico);
@@ -251,7 +239,6 @@
         private System.Windows.Forms.Button btnEliminarLogico;
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.TextBox txtFiltro;
-        private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.Label lblCampo;
         private System.Windows.Forms.ComboBox cbBoxCampo;
         private System.Windows.Forms.ComboBox cbBoxCriterio;

@@ -23,17 +23,38 @@ namespace presentacion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            frmAgregar Agregar = new frmAgregar();
-            Agregar.ShowDialog();
-            Cargar();
+            try
+            {
+                frmAgregar Agregar = new frmAgregar();
+                Agregar.ShowDialog();
+                Cargar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Pelicula Seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
-            frmAgregar Modificar = new frmAgregar(Seleccionado);
-            Modificar.ShowDialog();
-            Cargar();
+            try
+            {
+                if(dgvPelicula.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione una pelicula a modificar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Pelicula Seleccionado = (Pelicula)dgvPelicula.CurrentRow.DataBoundItem;
+                frmAgregar Modificar = new frmAgregar(Seleccionado);
+                Modificar.ShowDialog();
+                Cargar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)
@@ -46,10 +67,18 @@ namespace presentacion
 
         private void Cargar()
         {
-            NegocioPelicula NegocioPelicula = new NegocioPelicula();
-            listaPeliculas = NegocioPelicula.listar();
-            dgvPelicula.DataSource = listaPeliculas;
-            dgvPelicula.Columns["urlimagen"].Visible = false;
+            try
+            {
+                NegocioPelicula NegocioPelicula = new NegocioPelicula();
+                listaPeliculas = NegocioPelicula.listar();
+                dgvPelicula.DataSource = listaPeliculas;
+                dgvPelicula.Columns["urlimagen"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void CargarImagen(string Imagen)
@@ -76,7 +105,19 @@ namespace presentacion
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
-            Eliminar();
+            try
+            {
+                if(dgvPelicula.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione una pelicula a eliminar fisico.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Eliminar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void Eliminar(bool logico = false)
@@ -103,7 +144,20 @@ namespace presentacion
 
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
-            Eliminar(true);
+            try
+            {
+                if (dgvPelicula.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione una pelicula a eliminar logico.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Eliminar(true);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnFiltro_Click(object sender, EventArgs e)
@@ -200,6 +254,8 @@ namespace presentacion
         {
             try
             {
+                if (validarFiltro())
+                    return;
                 string campo = cbBoxCampo.SelectedItem.ToString();
                 string criterio = cbBoxcriterio.SelectedItem.ToString();
                 string filtro = txtFiltrar.Text;
@@ -211,6 +267,46 @@ namespace presentacion
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private bool validarFiltro()
+        {
+            if(cbBoxCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un campo a filtrar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            if(cbBoxcriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un criterio a filtrar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            if(cbBoxCampo.SelectedItem.ToString() == "Id")
+            {
+                if (string.IsNullOrEmpty(txtFiltrar.Text))
+                {
+                    MessageBox.Show("No puede estar vacio si deseas filtrar por id.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+                if (soloNumeros(txtFiltrar.Text))
+                {
+                    MessageBox.Show("Solo puede escribir numeros para filtrar por id.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool soloNumeros(string cadena)
+        {
+            foreach(char caracter in cadena)
+            {
+                if (char.IsNumber(caracter))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

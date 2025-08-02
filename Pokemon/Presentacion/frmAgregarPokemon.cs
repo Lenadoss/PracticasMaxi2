@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using System.IO;
+using System.Configuration;
 
 namespace Presentacion
 {
     public partial class frmAgregarPokemon : Form
     {
         private Pokemon pokemon = null;
+        private OpenFileDialog archivo = null;
         public frmAgregarPokemon()
         {
             InitializeComponent();
@@ -54,6 +57,10 @@ namespace Presentacion
                     negocio.Modificar(pokemon);
                     MessageBox.Show("Pokemon modificado correctamente");
                 }
+
+                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName); //First the file you wanna store, second the route, last the overwritten name.
+
                 this.Close();
             }
             catch (Exception ex)
@@ -98,7 +105,37 @@ namespace Presentacion
 
         private void txtUrlImagen_Leave(object sender, EventArgs e)
         {
-            CargarImagen(txtUrlImagen.Text);
+            try
+            {
+                CargarImagen(txtUrlImagen.Text);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                archivo = new OpenFileDialog();
+                archivo.Filter = "jpg|*.jpg;|png|*.png";
+                if (archivo.ShowDialog() == DialogResult.OK)
+                {
+                    txtUrlImagen.Text = archivo.FileName;
+                    CargarImagen(archivo.FileName);
+                }
+
+                //File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                //We dont do it in here because we wanna copy it only if the url doesnt come from the internet (doesnt have http in the url)
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

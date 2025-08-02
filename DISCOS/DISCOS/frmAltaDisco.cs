@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using System.Configuration;
+using System.IO;
 
 namespace DISCOS
 {
     public partial class frmAltaDisco : Form
     {
         private Disco disco = null;
+        private OpenFileDialog archivo = null;
         public frmAltaDisco()
         {
             InitializeComponent();
@@ -54,6 +57,9 @@ namespace DISCOS
                     discoNegocio.Modificar(disco);
                     MessageBox.Show("Disco modificado correctamente!");
                 }
+
+                if (archivo != null && !(txtUrlImagenTapa.Text.ToUpper().Contains("HTTP")))
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
 
                     Close();
             }
@@ -109,6 +115,25 @@ namespace DISCOS
             catch (Exception)
             {
                 pbxUrlImagenTapa.Load("https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png");
+            }
+        }
+
+        private void btnCargarImagen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                archivo = new OpenFileDialog();
+                archivo.Filter = "jpg|*.jpg;|png|*.png;|jpeg Image|*.jpeg";
+                if(archivo.ShowDialog() == DialogResult.OK)
+                {
+                    txtUrlImagenTapa.Text = archivo.FileName;
+                    CargarImagen(archivo.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
             }
         }
     }

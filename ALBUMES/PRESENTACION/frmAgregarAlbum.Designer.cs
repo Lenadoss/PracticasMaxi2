@@ -41,6 +41,7 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pbxCover = new System.Windows.Forms.PictureBox();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCover)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,18 +153,29 @@
             // pbxCover
             // 
             this.pbxCover.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.pbxCover.Location = new System.Drawing.Point(476, 44);
+            this.pbxCover.Location = new System.Drawing.Point(488, 44);
             this.pbxCover.Name = "pbxCover";
             this.pbxCover.Size = new System.Drawing.Size(253, 218);
             this.pbxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxCover.TabIndex = 17;
             this.pbxCover.TabStop = false;
             // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.Location = new System.Drawing.Point(450, 93);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(32, 23);
+            this.btnAgregarImagen.TabIndex = 18;
+            this.btnAgregarImagen.Text = "+";
+            this.btnAgregarImagen.UseVisualStyleBackColor = true;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
             // frmAgregarAlbum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 312);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.pbxCover);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
@@ -203,5 +215,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.PictureBox pbxCover;
+        private System.Windows.Forms.Button btnAgregarImagen;
     }
 }

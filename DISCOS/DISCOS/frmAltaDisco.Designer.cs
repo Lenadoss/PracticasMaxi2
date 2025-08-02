@@ -43,6 +43,7 @@
             this.txtUrlImagenTapa = new System.Windows.Forms.TextBox();
             this.lblurlImagenTapa = new System.Windows.Forms.Label();
             this.pbxUrlImagenTapa = new System.Windows.Forms.PictureBox();
+            this.btnCargarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxUrlImagenTapa)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,18 +170,29 @@
             // 
             // pbxUrlImagenTapa
             // 
-            this.pbxUrlImagenTapa.Location = new System.Drawing.Point(381, 28);
+            this.pbxUrlImagenTapa.Location = new System.Drawing.Point(399, 28);
             this.pbxUrlImagenTapa.Name = "pbxUrlImagenTapa";
             this.pbxUrlImagenTapa.Size = new System.Drawing.Size(259, 219);
             this.pbxUrlImagenTapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxUrlImagenTapa.TabIndex = 15;
             this.pbxUrlImagenTapa.TabStop = false;
             // 
+            // btnCargarImagen
+            // 
+            this.btnCargarImagen.Location = new System.Drawing.Point(364, 112);
+            this.btnCargarImagen.Name = "btnCargarImagen";
+            this.btnCargarImagen.Size = new System.Drawing.Size(29, 23);
+            this.btnCargarImagen.TabIndex = 16;
+            this.btnCargarImagen.Text = "+";
+            this.btnCargarImagen.UseVisualStyleBackColor = true;
+            this.btnCargarImagen.Click += new System.EventHandler(this.btnCargarImagen_Click);
+            // 
             // frmAltaDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 287);
+            this.Controls.Add(this.btnCargarImagen);
             this.Controls.Add(this.pbxUrlImagenTapa);
             this.Controls.Add(this.lblurlImagenTapa);
             this.Controls.Add(this.txtUrlImagenTapa);
@@ -224,5 +236,6 @@
         private System.Windows.Forms.TextBox txtUrlImagenTapa;
         private System.Windows.Forms.Label lblurlImagenTapa;
         private System.Windows.Forms.PictureBox pbxUrlImagenTapa;
+        private System.Windows.Forms.Button btnCargarImagen;
     }
 }

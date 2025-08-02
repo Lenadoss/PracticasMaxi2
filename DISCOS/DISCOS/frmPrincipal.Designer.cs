@@ -36,7 +36,6 @@
             this.btnEliminarLogico = new System.Windows.Forms.Button();
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.lblFiltro = new System.Windows.Forms.Label();
-            this.btnFiltro = new System.Windows.Forms.Button();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.txtFiltrar = new System.Windows.Forms.TextBox();
             this.lblCampo = new System.Windows.Forms.Label();
@@ -132,16 +131,6 @@
             this.lblFiltro.TabIndex = 6;
             this.lblFiltro.Text = "Filtro";
             // 
-            // btnFiltro
-            // 
-            this.btnFiltro.Location = new System.Drawing.Point(1162, 8);
-            this.btnFiltro.Name = "btnFiltro";
-            this.btnFiltro.Size = new System.Drawing.Size(96, 32);
-            this.btnFiltro.TabIndex = 8;
-            this.btnFiltro.Text = "Filtro";
-            this.btnFiltro.UseVisualStyleBackColor = true;
-            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
-            // 
             // btnFiltrar
             // 
             this.btnFiltrar.Location = new System.Drawing.Point(872, 397);
@@ -217,7 +206,6 @@
             this.Controls.Add(this.lblCampo);
             this.Controls.Add(this.txtFiltrar);
             this.Controls.Add(this.btnFiltrar);
-            this.Controls.Add(this.btnFiltro);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.btnEliminarLogico);
@@ -249,7 +237,6 @@
         private System.Windows.Forms.Button btnEliminarLogico;
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.Label lblFiltro;
-        private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.TextBox txtFiltrar;
         private System.Windows.Forms.Label lblCampo;

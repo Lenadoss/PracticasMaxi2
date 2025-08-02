@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using System.IO;
+using System.Configuration;
 
 namespace PRESENTACION
 {
     public partial class frmAgregarAlbum : Form
     {
         private Album album = null;
+        private OpenFileDialog archivo = null;
         public frmAgregarAlbum()
         {
             InitializeComponent();
@@ -53,6 +56,8 @@ namespace PRESENTACION
                     negocio.Modificar(album);
                     MessageBox.Show("Album Modificado exitosamente");
                 }
+                if (archivo != null && !(txtUrl.Text.ToUpper().Contains("HTTP")))
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
                     Close();
             }
             catch (Exception ex)
@@ -111,6 +116,25 @@ namespace PRESENTACION
             catch (Exception)
             {
                 pbxCover.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+            }
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                archivo = new OpenFileDialog();
+                archivo.Filter = "jpg|*.jpg;|png|*.png;|jpeg Image|*.jpeg";
+                if(archivo.ShowDialog() == DialogResult.OK)
+                {
+                    txtUrl.Text = archivo.FileName;
+                    CargarImagen(archivo.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
             }
         }
     }

@@ -40,7 +40,6 @@
             this.cbBoxCampo = new System.Windows.Forms.ComboBox();
             this.txtFiltrar = new System.Windows.Forms.TextBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
-            this.btnFiltro = new System.Windows.Forms.Button();
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.btnEliminarLogico = new System.Windows.Forms.Button();
@@ -79,7 +78,6 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.FlatAppearance.BorderSize = 3;
             this.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
             this.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -93,7 +91,6 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.FlatAppearance.BorderSize = 3;
             this.btnModificar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
             this.btnModificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -116,7 +113,6 @@
             this.gboxContainer.Controls.Add(this.cbBoxCampo);
             this.gboxContainer.Controls.Add(this.txtFiltrar);
             this.gboxContainer.Controls.Add(this.btnFiltrar);
-            this.gboxContainer.Controls.Add(this.btnFiltro);
             this.gboxContainer.Controls.Add(this.txtFiltro);
             this.gboxContainer.Controls.Add(this.lblFiltro);
             this.gboxContainer.Controls.Add(this.btnEliminarLogico);
@@ -194,16 +190,6 @@
             this.btnFiltrar.UseVisualStyleBackColor = true;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
-            // btnFiltro
-            // 
-            this.btnFiltro.Location = new System.Drawing.Point(953, 21);
-            this.btnFiltro.Name = "btnFiltro";
-            this.btnFiltro.Size = new System.Drawing.Size(116, 36);
-            this.btnFiltro.TabIndex = 12;
-            this.btnFiltro.Text = "Filtro";
-            this.btnFiltro.UseVisualStyleBackColor = true;
-            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
-            // 
             // txtFiltro
             // 
             this.txtFiltro.Location = new System.Drawing.Point(62, 28);
@@ -223,9 +209,8 @@
             // 
             // btnEliminarLogico
             // 
-            this.btnEliminarLogico.FlatAppearance.BorderSize = 3;
-            this.btnEliminarLogico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
-            this.btnEliminarLogico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnEliminarLogico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnEliminarLogico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnEliminarLogico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminarLogico.Location = new System.Drawing.Point(450, 357);
             this.btnEliminarLogico.Name = "btnEliminarLogico";
@@ -237,9 +222,8 @@
             // 
             // btnEliminarFisico
             // 
-            this.btnEliminarFisico.FlatAppearance.BorderSize = 3;
-            this.btnEliminarFisico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
-            this.btnEliminarFisico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnEliminarFisico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnEliminarFisico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnEliminarFisico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminarFisico.Location = new System.Drawing.Point(304, 357);
             this.btnEliminarFisico.Name = "btnEliminarFisico";
@@ -280,7 +264,6 @@
         private System.Windows.Forms.Button btnEliminarLogico;
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.Label lblFiltro;
-        private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.ComboBox cbBoxcriterio;
         private System.Windows.Forms.Label lblFiltrar;
         private System.Windows.Forms.Label lblCriterio;

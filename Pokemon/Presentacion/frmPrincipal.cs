@@ -68,26 +68,65 @@ namespace Presentacion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            frmAgregarPokemon agregarPokemon = new frmAgregarPokemon();
-            agregarPokemon.ShowDialog();
-            Cargar();
+            try
+            {
+                frmAgregarPokemon agregarPokemon = new frmAgregarPokemon();
+                agregarPokemon.ShowDialog();
+                Cargar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void tablaNula()
+        {
+            if (dgvPokemon.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona pokemon a modificar", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Pokemon seleccionado = (Pokemon)dgvPokemon.CurrentRow.DataBoundItem;
-            frmAgregarPokemon modificarPokemon = new frmAgregarPokemon(seleccionado);
-            modificarPokemon.ShowDialog();
-            Cargar();
+            try
+            {
+                if(dgvPokemon.CurrentRow == null)
+                {
+                    MessageBox.Show("Selecciona pokemon a modificar", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Pokemon seleccionado = (Pokemon)dgvPokemon.CurrentRow.DataBoundItem;
+                frmAgregarPokemon modificarPokemon = new frmAgregarPokemon(seleccionado);
+                modificarPokemon.ShowDialog();
+                Cargar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
+            if (dgvPokemon.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona pokemon a eliminar fisico", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             Eliminar();
         }
 
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
+            if (dgvPokemon.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona pokemon a eliminar logico", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             Eliminar(true);
         }
 
@@ -201,10 +240,52 @@ namespace Presentacion
             }
         }
 
+        private bool validarFiltro()
+        {
+            if(cbBoxCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione campo a filtrar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            if(cbBoxCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona criterio a filtrar.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            if(cbBoxCampo.SelectedItem.ToString() == "Numero")
+            {
+                if (string.IsNullOrEmpty(txtBuscarAvanzado.Text))
+                {
+                    MessageBox.Show("Debes cargar el fitro para numericos.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+                if (soloNumeros(txtBuscarAvanzado.Text))
+                {
+                    MessageBox.Show("Solo se pueden cargar numeros para filtrar por numero..", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool soloNumeros(string cadena)
+        {
+            foreach(char caracter in cadena)
+            {
+                if (char.IsNumber(caracter))
+                    return false;
+            }
+            return true;
+        }
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
+                if (validarFiltro())
+                    return;
+
                 string campo = cbBoxCampo.SelectedItem.ToString();
                 string criterio = cbBoxCriterio.SelectedItem.ToString();
                 string filtro = txtBuscarAvanzado.Text;

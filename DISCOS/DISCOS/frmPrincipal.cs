@@ -88,15 +88,40 @@ namespace DISCOS
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            frmAltaDisco DiscoModificar = new frmAltaDisco(seleccionado);
-            DiscoModificar.ShowDialog();
-            Cargar();
+            try
+            {
+                if(dgvDiscos.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un disco a modificar", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                frmAltaDisco DiscoModificar = new frmAltaDisco(seleccionado);
+                DiscoModificar.ShowDialog();
+                Cargar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
-            Eliminar();
+            try
+            {
+                if (dgvDiscos.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un disco a eliminar fisico", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Eliminar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void Eliminar(bool logico = false)
@@ -124,7 +149,20 @@ namespace DISCOS
 
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
-            Eliminar(true);
+            try
+            {
+                if (dgvDiscos.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un disco a eliminar logico", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Eliminar(true);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnFiltro_Click(object sender, EventArgs e)
@@ -188,6 +226,8 @@ namespace DISCOS
         {
             try
             {
+                if (validarFiltro())
+                    return;
                 string campo = cbBoxCampo.SelectedItem.ToString();
                 string criterio = cbBoxCriterio.SelectedItem.ToString();
                 string filtro = txtFiltrar.Text;
@@ -199,6 +239,46 @@ namespace DISCOS
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private bool validarFiltro()
+        {
+            if(cbBoxCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un campo a filtrar", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            if(cbBoxCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un criterio a filtrar", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            if(cbBoxCampo.SelectedItem.ToString() == "Id")
+            {
+                if (string.IsNullOrEmpty(txtFiltrar.Text))
+                {
+                    MessageBox.Show("No puede filtrar con el campo vacio para filtrar por Id.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+                if (soloNumeros(txtFiltrar.Text))
+                {
+                    MessageBox.Show("No puedes digitar letras para filtrar por Id.", "Considerando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool soloNumeros(string cadena)
+        {
+            foreach(char caracter in cadena)
+            {
+                if (char.IsNumber(caracter))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
